@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="cart-page">
+  <div class="page-shell">
+  <header class="site-header">
+  <a class="brand" href="home.html">Art Lovers Australia</a>
+  <nav class="header-icons" aria-label="Main navigation">
+    <button class="icon-btn" data-open-search aria-label="Search">
+      <span class="icon search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </span>
+    </button>
+    <a class="icon-btn fav-top" href="wishlist.html" aria-label="Wishlist">
+          <span class="icon heart"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
+    </a> 
+    <a class="icon-btn" href="cart.html" aria-label="Cart">
+      <span class="icon cart">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      </span>
+    </a>
+  </nav>
+</header>
+  <main class="cart-layout">
+    <section>
+      <nav class="breadcrumb"><a href="home.html">Home</a><span class="chev">›</span><a href="product-list.html">List</a><span class="chev">›</span><span>Cart</span></nav>
+      <h1 class="cart-title">Cart<span>Your collection</span></h1>
+      <div class="cart-list">
+        <!-- Items will be loaded from localStorage -->
+      </div>
+    </section>
+    <aside class="summary"><h2>Order Summary</h2><div class="sum-row"><span class="label">Subtotal</span><span id="summarySubtotal">$1,600</span></div><div class="sum-row"><span class="label">Tax</span><span id="summaryTax">$124</span></div><div class="sum-row"><span class="label">Shipping</span><span>$0</span></div><div class="sum-total"><span class="label">Total Amount</span><span class="amount" id="summaryTotal">$1,724.00</span></div><button class="checkout-btn" onclick="location.href='checkout.html'">Proceed to checkout</button><div class="secure"><span>♙</span><span>Secure Transaction</span></div></aside>
+  </main>
+  <footer class="footer">
+  <a class="brand" href="home.html">Art Lovers Australia</a>
+  <nav class="footer-nav" aria-label="Footer links">
+    <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Index</a><a href="#">Submission</a>
+  </nav>
+  <div class="copyright">© 2026 Art Lovers Australia. All rights reserved.</div>
+</footer>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>
