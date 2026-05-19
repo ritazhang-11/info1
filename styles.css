@@ -309,6 +309,13 @@ img {
 	opacity: .58;
 	transition: opacity .18s ease,transform .18s ease;
 }
+.search-caption{font-family:var(--font-tech);
+	font-size:12px;
+	letter-spacing:.22em;
+	color:#8b8b8b;
+	text-transform:uppercase;
+	margin-bottom:8px
+}
 
 .hero {
 	position: relative;
@@ -360,7 +367,7 @@ img {
 	cursor: pointer;
 }
 
-.promo {
+.promotion {
     background: black;
     color: white;
     padding: 0;
@@ -451,7 +458,6 @@ img {
 	letter-spacing: 0;
 	margin-top: 9px;
 }
-
 .layout-icon.active,
 .layout-icon:hover {
 	opacity: 1;
