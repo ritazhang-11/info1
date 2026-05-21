@@ -273,4 +273,182 @@
       },
       "aboutArtist": "Mark Rein experiments with mediums..."
     }
-  ]})
+  ];
+
+  let currentFilter = 'all';
+  let currentSort = null;
+
+  function navigateSearch(term){
+    location.href = `search-results.html?q=${encodeURIComponent(term || 'Cold colour')}`;
+  }
+
+  function chooseLayout(type){
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('q');
+    const qParam = query ? `?q=${encodeURIComponent(query)}` : '';
+    const current = path();
+    const isSearch = current.startsWith('search-results');
+    const isList = current.startsWith('product-list');
+    if(type === 'vertical'){
+      if(isSearch) location.href = 'search-results-vertical.html' + qParam;
+      else if(isList) location.href = 'product-list2.html';
+      else location.href = 'product-list2.html';
+      return;
+    }
+    if(isSearch) location.href = 'search-results.html' + qParam;
+    else if(isList) location.href = 'product-list.html';
+    else location.href = 'product-list.html';
+  }
+
+  function filterCards(category) {
+    currentFilter = category;
+    renderProductList();
+  }
+
+  function sortCards(dir) {
+    currentSort = dir;
+    renderProductList();
+  }
+
+  async function renderProductList() {
+    const grid = $('.art-grid');
+    if (!grid) return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const rawQuery = urlParams.get('q');
+    const query = rawQuery?.toLowerCase();
+    const isVertical = grid.classList.contains('two-col');
+    const wishlist = getWishlist();
+    let products = [...productsData];
+
+    if (query) {
+      products = products.filter(p => matchesSearch(p, query));
+    }
+
+    if (currentFilter !== 'all') {
+      products = products.filter(p => p.category === currentFilter);
+    }
+
+    if (currentSort === 'asc') {
+      products.sort((a, b) => a.price - b.price);
+    } else if (currentSort === 'desc') {
+      products.sort((a, b) => b.price - a.price);
+    }
+
+    const titleEl = $('.big-title');
+    const countEl = $('.countbox .num');
+    if (query && titleEl) {
+      titleEl.textContent = rawQuery;
+      document.title = `Search Results - ${rawQuery}`;
+    }
+    if (countEl) countEl.textContent = products.length;
+    updateSearchLayoutLinks();
+
+    if (products.length === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1; padding:100px 0; text-align:center; font-family:var(--font-tech);">No artworks found.</div>';
+      return;
+    }
+
+    grid.innerHTML = products.map(p => {
+      const priceHtml = p.originalPrice
+        ? `<span class="old-price">${money(p.originalPrice).replace('.00','')}</span> AUD${money(p.price).replace('.00','')}`
+        : `AUD${money(p.price).replace('.00','')}`;
+      const isFav = wishlist.includes(p.id);
+      return `
+        <article class="art-card" data-price="${p.price}" data-category="${p.category}">
+          <a class="art-img-wrap" href="product-pages.html?id=${p.id}">
+            <img class="${(p.id === 'neon-57' || isVertical) ? 'art-img-wide' : ''}" src="${p.image}" alt="${p.title}" />
+          </a>
+          <div class="art-meta">
+            <a href="product-pages.html?id=${p.id}">
+              <h3 class="art-title">${p.title}</h3>
+              <p class="art-artist">${p.artist}</p>
+            </a>
+            <button class="fav ${isFav ? 'is-on' : ''}" data-wish-id="${p.id}" aria-label="Add to wishlist">
+              ${isFav ? '♥' : '♡'}
+            </button>
+          </div>
+          <div class="price">${priceHtml}</div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  async function renderProductPages() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    if (!productId) return;
+    const product = productsData.find(p => p.id === productId);
+    if (!product) {
+      const content = $('#productDetailContent');
+      if(content) content.innerHTML = '<div style="padding:100px;text-align:center;font-family:var(--font-tech);"><h1>Product not found</h1><a href="product-list.html" style="text-decoration:underline">Back to List</a></div>';
+      return;
+    }
+    const specsHtml = Object.entries(product.specs).map(([label, value]) =>
+      `<div class="spec-row"><div class="label">${label}</div><div>${value}</div></div>`
+    ).join('');
+    const content = $('#productDetailContent');
+    if(!content) return;
+    document.title = `${product.title} - Art Lovers Australia`;
+    const detailPriceHtml = product.originalPrice
+      ? `<span class="old-price detail">${money(product.originalPrice).replace('.00','')}</span> AUD${money(product.price).replace('.00','')}`
+      : `AUD${money(product.price).replace('.00','')}`;
+    const isFav = getWishlist().includes(product.id);
+    content.innerHTML = `
+      <div class="content">
+        <nav class="breadcrumb">
+          <a href="home.html">Home</a>
+          <span class="chev">›</span>
+          <a href="product-list.html">List</a>
+          <span class="chev">›</span>
+          <span>${product.title}</span>
+        </nav>
+      </div>
+      <section class="product-hero">
+        <div class="product-gallery">
+          <img class="main-art" src="${product.image}" alt="${product.title}" />
+          <div class="pager"><span class="active"></span><span></span></div>
+        </div>
+        <div class="product-info ${product.id}" data-base-price="${product.price}">
+          <h1 class="product-title">${product.title.replace(' ', '<br/>')}</h1>
+          <div class="byline">BY ${product.artist}</div>
+          <div class="product-desc"><p>${product.description}</p></div>
+          <div class="qty-price">
+            <div class="price-row">
+              <span class="price-label">Investment</span>
+              <span class="product-price">${detailPriceHtml}</span>
+            </div>
+            <div class="price-row">
+              <span class="price-label">Quantity</span>
+              <div class="qty-control">
+                <button data-qty="minus">−</button>
+                <span class="product-qty">1</span>
+                <button data-qty="plus">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-actions">
+            <button class="wish-btn fav ${isFav ? 'is-on' : ''}" data-wish-id="${product.id}" aria-label="Add to wishlist">
+              ${isFav ? '♥' : '♡'}
+            </button>
+            <button class="add-cart" data-add-cart>Acquire Artwork</button>
+          </div>
+        </div>
+      </section>
+      <section class="info-band">
+        <div class="info-cards">
+          <div class="info-card">
+            <h3>Details Information</h3>
+            ${specsHtml}
+          </div>
+          <div class="info-card">
+            <h3>About the Artist</h3>
+            <p class="about-artist-text">${product.aboutArtist}</p>
+            <div class="shipping-line">7 day returns guaranteed</div>
+            <div class="shipping-line">Free Shipping Australia Wide</div>
+          </div>
+        </div>
+      </section>
+    `;
+    initProductQty();
+    initGalleryCarousel(product.image, product.roomImage);
+  }})
