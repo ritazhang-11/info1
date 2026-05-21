@@ -202,24 +202,6 @@
       "aboutArtist": "Emma's portraiture is sought after..."
     },
     {
-      "id": "urban-prism",
-      "title": "Urban Prism",
-      "artist": "Mark Rein",
-      "price": 1800,
-      "category": "warm",
-      "image": "assets/intro-prism.jpg",
-      "roomImage": "assets/neon-57.png",
-      "description": "Fractured light and urban forms...",
-      "specs": {
-        "Medium": "Spray Paint and Resin",
-        "Edition": "Unique Piece",
-        "Dimensions": "120 x 80 cm",
-        "Framing": "N/A (Cradled Panel)",
-        "Paper Weight": "N/A"
-      },
-      "aboutArtist": "Mark Rein's background in street art..."
-    },
-    {
       "id": "still-life-vases",
       "title": "Still Life Vases",
       "artist": "Elie Bittoun",
@@ -237,49 +219,13 @@
       },
       "aboutArtist": "Elie's still life works are celebrated..."
     },
-    {
-      "id": "coastal-breeze",
-      "title": "Coastal Breeze",
-      "artist": "Chris Dark",
-      "price": 750,
-      "category": "cold",
-      "image": "assets/intro-place.jpg",
-      "roomImage": "assets/city-room.png",
-      "description": "Minimalist horizon study...",
-      "specs": {
-        "Medium": "Photography",
-        "Edition": "Limited edition of 20",
-        "Dimensions": "60 x 40 cm",
-        "Framing": "Unframed",
-        "Paper Weight": "310gsm"
-      },
-      "aboutArtist": "Chris Dark's photography evokes solitude..."
-    },
-    {
-      "id": "pop-culture-pink",
-      "title": "Pop Culture Pink",
-      "artist": "Mark Rein",
-      "price": 1400,
-      "category": "warm",
-      "image": "assets/intro-pop.png",
-      "roomImage": "assets/neon-57.png",
-      "description": "Playful high-energy pop art...",
-      "specs": {
-        "Medium": "Mixed Media on Wood",
-        "Edition": "Original Artwork",
-        "Dimensions": "80 x 80 cm",
-        "Framing": "N/A",
-        "Paper Weight": "N/A"
-      },
-      "aboutArtist": "Mark Rein experiments with mediums..."
-    }
   ];
 
   let currentFilter = 'all';
   let currentSort = null;
 
   function navigateSearch(term){
-    location.href = `search-results.html?q=${encodeURIComponent(term || 'Cold colour')}`;
+    location.href = `search-results.html?q=${encodeURIComponent(term || '')}`;
   }
 
   function chooseLayout(type){
@@ -299,6 +245,15 @@
     else if(isList) location.href = 'product-list.html';
     else location.href = 'product-list.html';
   }
+
+  function matchesSearch(product, query) {
+   const q = query.toLowerCase().trim();
+   const text = (product.title + product.artist + product.category).toLowerCase();
+   return text.includes(q);
+}
+
+  function updateSearchLayoutLinks() {
+}
 
   function filterCards(category) {
     currentFilter = category;
@@ -344,7 +299,7 @@
     updateSearchLayoutLinks();
 
     if (products.length === 0) {
-      grid.innerHTML = '<div style="grid-column:1/-1; padding:100px 0; text-align:center; font-family:var(--font-tech);">No artworks found.</div>';
+      grid.innerHTML = '<div style="grid-column:1/-1; padding:100px 0; text-align:center; font-family:Arial, sans-serif;">No artworks found.</div>';
       return;
     }
 
@@ -380,7 +335,7 @@
     const product = productsData.find(p => p.id === productId);
     if (!product) {
       const content = $('#productPagesContent');
-      if(content) content.innerHTML = '<div style="padding:100px;text-align:center;font-family:var(--font-tech);"><h1>Product not found</h1><a href="product-list.html" style="text-decoration:underline">Back to List</a></div>';
+      if(content) content.innerHTML = '<div style="padding:100px;text-align:center;font-family:Arial, sans-serif;"><h1>Product not found</h1><a href="product-list.html" style="text-decoration:underline">Back to List</a></div>';
       return;
     }
     const specsHtml = Object.entries(product.specs).map(([label, value]) =>
@@ -451,7 +406,7 @@
     `;
     initProductQty();
     initGalleryCarousel(product.image, product.roomImage);
-  }})
+  }
 
     function initGalleryCarousel(imgSrc, roomSrc) {
     const gallery = $('.product-gallery');
@@ -486,7 +441,7 @@ function injectModals(){
         <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Search">
           <button class="modal-close" data-close-modal aria-label="Close">×</button>
           <form class="search-form" id="searchForm">
-            <input id="searchInput" type="search" autocomplete="off" value="Cold colour" aria-label="Search artwork" />
+            <input id="searchInput" type="search" autocomplete="off" value="" aria-label="Search artwork" />
             <button type="submit" aria-label="Submit search">
               <span class="icon search"></span>
             </button>
@@ -527,3 +482,118 @@ function showToast(text){
   clearTimeout(showToast._timer);
   showToast._timer = setTimeout(()=>toast.classList.remove('show'), 1400);
 }
+
+ function getCart() { return JSON.parse(localStorage.getItem('artCart') || '[]'); }
+  function saveCart(cart) { localStorage.setItem('artCart', JSON.stringify(cart)); }
+  function getWishlist() { return JSON.parse(localStorage.getItem('artWishlist') || '[]'); }
+  function saveWishlist(list) { localStorage.setItem('artWishlist', JSON.stringify(list)); }
+
+  function toggleWishlist(productId) {
+    let list = getWishlist();
+    const index = list.indexOf(productId);
+    if (index > -1) {
+      list.splice(index, 1);
+      showToast('Removed from wishlist');
+    } else {
+      list.push(productId);
+      showToast('Added to wishlist');
+    }
+    saveWishlist(list);
+    if (path() === 'wishlist.html') renderWishlist();
+  }
+
+  function renderWishlist() {
+    const grid = $('#wishlistGrid');
+    const emptyMsg = $('#emptyMsg');
+    const countNode = $('#wishCount');
+    if (!grid) return;
+    const wishlist = getWishlist();
+    const products = productsData.filter(p => wishlist.includes(p.id));
+    if (countNode) countNode.textContent = products.length;
+    if (products.length === 0) {
+      grid.innerHTML = '';
+      if(emptyMsg) emptyMsg.style.display = 'block';
+      return;
+    }
+    if(emptyMsg) emptyMsg.style.display = 'none';
+    grid.innerHTML = products.map(p => {
+      const priceHtml = p.originalPrice
+        ? `<span class="old-price">${money(p.originalPrice).replace('.00','')}</span> AUD${money(p.price).replace('.00','')}`
+        : `AUD${money(p.price).replace('.00','')}`;
+      return `
+        <article class="art-card" data-id="${p.id}">
+          <a class="art-img-wrap" href="product-pages.html?id=${p.id}">
+            <img src="${p.image}" alt="${p.title}" />
+          </a>
+          <div class="art-meta">
+            <a href="product-pages.html?id=${p.id}">
+              <h3 class="art-title">${p.title}</h3>
+              <p class="art-artist">${p.artist}</p>
+            </a>
+            <button class="fav is-on" data-wish-id="${p.id}" aria-label="Remove from wishlist">♥</button>
+          </div>
+          <div class="price">${priceHtml}</div>
+        </article>
+      `;
+    }).join('');
+  }
+
+  function addToCart(productId, qty) {
+    const cart = getCart();
+    const product = productsData.find(p => p.id === productId);
+    if (!product) return;
+    const existing = cart.find(item => item.id === productId);
+    if (existing) existing.qty += qty;
+    else cart.push({ id: product.id, title: product.title, artist: product.artist, price: product.price, image: product.image, qty });
+    saveCart(cart);
+    showToast('Added to cart');
+  }
+
+  function removeFromCart(productId) {
+    saveCart(getCart().filter(item => item.id !== productId));
+    renderCart();
+  }
+
+  function updateCartQty(productId, delta) {
+    const cart = getCart();
+    const item = cart.find(i => i.id === productId);
+    if (item) {
+      item.qty = Math.max(1, item.qty + delta);
+      saveCart(cart);
+      renderCart();
+    }
+  }
+
+  function renderCart(){
+    const cartList = $('.cart-list');
+    if(!cartList) return;
+    const cart = getCart();
+    if (cart.length === 0) {
+      cartList.innerHTML = '<div style="padding:40px 0; font-family:Arial, sans-serif;">Your cart is empty. <a href="product-list.html" style="text-decoration:underline">Shop Art</a></div>';
+      updateCartSummary(0);
+      return;
+    }
+    cartList.innerHTML = cart.map(item => `
+      <div class="cart-item" data-id="${item.id}" data-price="${item.price}">
+        <div class="select-dot checked"></div>
+        <img class="cart-thumb" src="${item.image}" alt="${item.title}" />
+        <div class="cart-copy">
+          <h3>${item.title}</h3>
+          <p>${item.artist}</p>
+          <button class="remove" data-remove-id="${item.id}">Remove</button>
+        </div>
+        <div class="qty-stack">
+          <div class="qty-caption">QTY</div>
+          <div class="cart-qty">
+            <button data-cart-qty="minus" data-id="${item.id}">−</button>
+            <input type="text" value="${item.qty}" readonly />
+            <button data-cart-qty="plus" data-id="${item.id}">+</button>
+          </div>
+          <div class="price-caption">PRICE</div>
+          <div class="item-price">AUD${money(item.price * item.qty).replace('.00','')}</div>
+        </div>
+      </div>
+    `).join('');
+    recalcCart();
+  }
+})
