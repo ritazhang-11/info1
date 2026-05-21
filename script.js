@@ -379,14 +379,14 @@
     if (!productId) return;
     const product = productsData.find(p => p.id === productId);
     if (!product) {
-      const content = $('#productDetailContent');
+      const content = $('#productPagesContent');
       if(content) content.innerHTML = '<div style="padding:100px;text-align:center;font-family:var(--font-tech);"><h1>Product not found</h1><a href="product-list.html" style="text-decoration:underline">Back to List</a></div>';
       return;
     }
     const specsHtml = Object.entries(product.specs).map(([label, value]) =>
       `<div class="spec-row"><div class="label">${label}</div><div>${value}</div></div>`
     ).join('');
-    const content = $('#productDetailContent');
+    const content = $('#productPagesContent');
     if(!content) return;
     document.title = `${product.title} - Art Lovers Australia`;
     const detailPriceHtml = product.originalPrice
@@ -452,3 +452,78 @@
     initProductQty();
     initGalleryCarousel(product.image, product.roomImage);
   }})
+
+    function initGalleryCarousel(imgSrc, roomSrc) {
+    const gallery = $('.product-gallery');
+    if (!gallery) return;
+    const img = $('img.main-art', gallery);
+    const dots = $$('.pager span', gallery);
+    if (!img || dots.length < 2) return;
+
+    const sources = [imgSrc, roomSrc];
+    let current = 0;
+
+    function switchImg(index) {
+      index = index % sources.length;
+      current = index;
+      img.classList.add('fade');
+      setTimeout(() => {
+        img.src = sources[current];
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        img.classList.remove('fade');
+      }, 300);
+    }
+    img.style.cursor = 'pointer';
+    img.addEventListener('click', () => switchImg(current + 1));
+  }
+
+function injectModals(){
+    if($('#prototype-modals')) return;
+    const wrap = document.createElement('div');
+    wrap.id = 'prototype-modals';
+    wrap.innerHTML = `
+      <div class="modal search-modal" id="searchModal" aria-hidden="true">
+        <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Search">
+          <button class="modal-close" data-close-modal aria-label="Close">×</button>
+          <form class="search-form" id="searchForm">
+            <input id="searchInput" type="search" autocomplete="off" value="Cold colour" aria-label="Search artwork" />
+            <button type="submit" aria-label="Submit search">
+              <span class="icon search"></span>
+            </button>
+          </form>
+          <div class="suggestions">
+            <button data-search-term="Cold">Cold</button>
+            <button data-search-term="Warm">Warm</button>
+            <button data-search-term="Emma Coombes">Emma Coombes</button>
+          </div>
+        </div>
+      </div>
+      <div class="toast" id="toast">Added to cart</div>
+    `;
+    document.body.appendChild(wrap);
+  }
+
+function openModal(id){
+  const modal = document.getElementById(id);
+  if(!modal) return;
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+  const input = $('#searchInput', modal);
+  if(input) setTimeout(()=>input.focus(), 40);
+}
+
+function closeModals(){ 
+  $$('.modal').forEach(m => { 
+    m.classList.remove('show'); 
+    m.setAttribute('aria-hidden','true'); 
+  }); 
+}
+
+function showToast(text){
+  const toast = $('#toast'); 
+  if(!toast) return;
+  toast.textContent = text; 
+  toast.classList.add('show');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(()=>toast.classList.remove('show'), 1400);
+}
