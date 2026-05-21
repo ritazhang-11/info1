@@ -385,7 +385,7 @@
             <button class="wish-btn fav ${isFav ? 'is-on' : ''}" data-wish-id="${product.id}" aria-label="Add to wishlist">
               ${isFav ? '♥' : '♡'}
             </button>
-            <button class="add-cart" data-add-cart>Acquire Artwork</button>
+            <button class="add-cart" data-add-cart>Add to cart</button>
           </div>
         </div>
       </section>
@@ -596,4 +596,146 @@ function showToast(text){
     `).join('');
     recalcCart();
   }
-})
+
+   function recalcCart() {
+    let subtotal = 0;
+    $$('.cart-item').forEach(item => {
+      if ($('.select-dot', item).classList.contains('checked')) {
+        subtotal += Number(item.dataset.price) * Number($('.cart-qty input', item).value);
+      }
+    });
+    updateCartSummary(subtotal);
+  }
+
+  function updateCartSummary(subtotal) {
+    const tax = Math.round(subtotal * 0.0775);
+    const total = subtotal + tax;
+    const subNode = $('#summarySubtotal');
+    const taxNode = $('#summaryTax');
+    const totalNode = $('#summaryTotal');
+    if(subNode) subNode.textContent = money(subtotal).replace('.00','');
+    if(taxNode) taxNode.textContent = money(tax).replace('.00','');
+    if(totalNode) totalNode.textContent = moneyFixed(total);
+  }
+
+  function initProductQty(){
+    const product = $('.product-info');
+    if(!product) return;
+    const base = Number(product.dataset.basePrice || 0);
+    const qty = $('.product-qty', product);
+    const price = $('.product-price', product);
+    $$('.qty-control button', product).forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        let n = Number(qty.textContent || 1);
+        if(btn.dataset.qty === 'minus') n = Math.max(1, n - 1);
+        else n = n + 1;
+        qty.textContent = n;
+        if(price) {
+          const pData = productsData.find(p => p.id === product.classList[1]);
+          price.innerHTML = pData && pData.originalPrice
+            ? `<span class="old-price detail">${money(pData.originalPrice * n).replace('.00','')}</span> AUD${money(base * n).replace('.00','')}`
+            : `AUD${money(base * n).replace('.00','')}`;
+        }
+      });
+    });
+  }
+
+  function bindEvents(){
+    document.addEventListener('click', e=>{
+      if(e.target.closest('[data-open-search]')){
+        e.preventDefault();
+        openModal('searchModal');
+        return;
+      }
+      if(e.target.closest('[data-open-filter]')){
+        e.preventDefault();
+        const panel = document.querySelector('.filter-options');
+        if(panel) panel.classList.toggle('show');
+        return;
+      }
+      if(e.target.closest('[data-close-modal]') || e.target.classList.contains('modal')){
+        e.preventDefault();
+        closeModals();
+        return;
+      }
+      const suggestion = e.target.closest('[data-search-term]');
+      if(suggestion){
+        e.preventDefault();
+        closeModals();
+        const input = $('#searchInput');
+        if(input) input.value = suggestion.dataset.searchTerm;
+        navigateSearch(suggestion.dataset.searchTerm);
+        return;
+      }
+      const sort = e.target.closest('[data-sort]');
+      if(sort){ e.preventDefault(); sortCards(sort.dataset.sort); return; }
+      const filter = e.target.closest('[data-filter]');
+      if(filter){ e.preventDefault(); filterCards(filter.dataset.filter); return; }
+      const fav = e.target.closest('.fav');
+      if(fav){
+        e.preventDefault();
+        const wishId = fav.dataset.wishId;
+        if (wishId) {
+          toggleWishlist(wishId);
+          fav.classList.toggle('is-on');
+          fav.textContent = fav.classList.contains('is-on') ? '♥' : '♡';
+        }
+        return;
+      }
+      const addCart = e.target.closest('[data-add-cart]');
+      if(addCart){
+        e.preventDefault();
+        const pId = new URLSearchParams(window.location.search).get('id');
+        const qty = Number($('.product-qty')?.textContent || 1);
+        if (pId) {
+          addToCart(pId, qty);
+          setTimeout(()=>{ location.href='cart.html'; }, 800);
+        }
+        return;
+      }
+      if(e.target.closest('[data-remove-id]')){
+        removeFromCart(e.target.closest('[data-remove-id]').dataset.removeId);
+        return;
+      }
+      const cartQtyBtn = e.target.closest('[data-cart-qty]');
+      if(cartQtyBtn){
+        updateCartQty(cartQtyBtn.dataset.id, cartQtyBtn.dataset.cartQty === 'plus' ? 1 : -1);
+        return;
+      }
+      if(e.target.closest('.select-dot')){
+        e.target.closest('.select-dot').classList.toggle('checked');
+        recalcCart();
+        return;
+      }
+      if(e.target.closest('[data-back-top]')){
+        e.preventDefault();
+        window.scrollTo({top:0, behavior:'smooth'});
+      }
+    });
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeModals(); });
+    const searchForm = $('#searchForm');
+    if(searchForm){
+      searchForm.addEventListener('submit', e=>{
+        e.preventDefault();
+        closeModals();
+        navigateSearch($('#searchInput').value.trim() || 'Cold colour');
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    injectModals();
+    bindEvents();
+    initProductQty();
+    const cur = path();
+    if (cur.includes('product-list') || cur.includes('search-results')) {
+      renderProductList();
+    } else if (cur === 'product-pages.html') {
+      renderProductPages();
+    } else if (cur === 'cart.html') {
+      renderCart();
+    } else if (cur === 'wishlist.html') {
+      renderWishlist();
+    }
+  });
+});
