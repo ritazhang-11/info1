@@ -738,4 +738,4 @@ function showToast(text){
       renderWishlist();
     }
   });
-});
+})();
