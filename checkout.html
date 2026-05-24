@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout Payment</title>
+  <link rel="stylesheet" href="styles.css" />
+  
+<body class="checkout-page-body">
+  <header class="site-header">
+    <a class="brand" href="home.html">Art Lovers Australia</a>
+    <nav class="header-icons">
+      <button class="icon-btn" data-open-search aria-label="Search">
+        <span class="icon search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+      </button>
+      <a class="icon-btn fav-top" href="wishlist.html" aria-label="Wishlist">
+      <span class="icon heart"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart">
+        <span class="icon cart">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        </span>
+      </a>
+    </nav>
+  </header>
+
+  <div class="checkout-layout">
+    <div class="checkout-left">
+      <h2>Your Order Items</h2>
+      <div id="checkoutItems"></div>
+    </div>
+
+    <div class="checkout-right">
+      <section class="checkout-card">
+        <h1>Checkout Payment</h1>
+
+        <form id="checkoutForm">
+          <h2>Digital Delivery Information</h2>
+
+          <div class="field">
+            <label for="first">First Name</label>
+            <input id="first" value="Haidan" required />
+          </div>
+
+          <div class="field">
+            <label for="last">Last Name</label>
+            <input id="last" value="Zhang" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input id="email" type="email" value="HDZzzz777@gmail.com" required />
+          </div>
+          <div class="hint">Your high-resolution digital file will be sent here.</div>
+
+          <div class="field">
+            <label for="wallet">Wallet Address</label>
+            <input id="wallet" value="2843 4872 3948" required />
+          </div>
+
+          <div class="order-summary">
+            <div class="sum-row">
+              <span>Subtotal</span>
+              <span id="sumSubtotal">$0</span>
+            </div>
+            <div class="sum-row">
+              <span>Tax (7.75%)</span>
+              <span id="sumTax">$0</span>
+            </div>
+            <div class="sum-row">
+              <span>Shipping</span>
+              <span>Free</span>
+            </div>
+            <div class="sum-total">
+              <span>Total</span>
+              <span id="sumTotal">$0</span>
+
+          <button class="continue-btn" type="submit">Continue to Payment</button>
+        </form>
+      </section>
+      </div>
+      </div>
+  
+</body>
+</html>
