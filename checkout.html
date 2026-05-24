@@ -34,7 +34,7 @@
       padding: 16px 0;
       border-bottom: 1px solid #eee;
     }
-    .checknot-item-img {
+    .checkout-item-img {
       width: 100px;
       height: 100px;
       object-fit: cover;
@@ -217,12 +217,40 @@
             <div class="sum-total">
               <span>Total</span>
               <span id="sumTotal">$0</span>
+            </div>
 
           <button class="continue-btn" type="submit">Continue to Payment</button>
         </form>
       </section>
       </div>
-      </div>
+    </div>
   
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pending = JSON.parse(localStorage.getItem('pendingOrder') || '{"items":[],"tax":0,"total":0}');
+      const itemsEl = document.getElementById('checkoutItems');
+
+      if (!pending.items.length) {
+        itemsEl.innerHTML = '<div style="padding:20px; font-family:Arial, sans-serif;">No items in your order.</div>';
+      } else {
+        itemsEl.innerHTML = pending.items.map(item => `
+          <div class="checkout-item">
+            <img src="${item.image}" class="checkout-item-img" alt="${item.title}">
+            <div class="checkout-item-info">
+              <h4>${item.title}</h4>
+              <p>${item.artist} × ${item.qty}</p>
+            </div>
+            <div class="checkout-item-price">AUD$${(item.price * item.qty).toLocaleString()}</div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('sumSubtotal').innerText = '$' + (pending.total - pending.tax).toLocaleString();
+      document.getElementById('sumTax').innerText = '$' + pending.tax.toLocaleString();
+      document.getElementById('sumTotal').innerText = '$' + pending.total.toLocaleString();
+    });
+  </script>
+
 </body>
 </html>
