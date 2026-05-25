@@ -862,7 +862,7 @@ img {
 
 .info-card {
 	background: #fff;
-	box-shadow: var(--shadow);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 	padding: 33px 50px 34px;
 	min-height: 206px
 }
@@ -897,12 +897,243 @@ img {
 	font-size: 15px;
 	letter-spacing: .15em;
 	text-transform: uppercase;
-	color: var(--green);
+	color: #00c853;
 	font-weight: 800;
 	border-bottom: 1px solid #e6e6e6;
 	padding: 17px 0
 }
 
+
+.cart-layout {
+	display: grid;
+	grid-template-columns: 1fr 452px;
+	gap: 132px;
+	padding: 0 48px 106px
+}
+
+.cart-title {
+	font-family: Arial, sans-serif;
+	font-size: 64px;
+	line-height: .95;
+	text-transform: uppercase;
+	letter-spacing: .01em;
+	font-weight: 500;
+	margin: 74px 0 72px
+}
+
+.cart-title span {
+	display: block;
+	font-size: 24px;
+	margin-top: 20px
+}
+
+.cart-list {
+	border-top: 3px solid #111
+}
+
+.cart-item {
+	display: grid;
+	grid-template-columns: 42px 170px 1fr 118px;
+	gap: 22px;
+	align-items: center;
+	border-bottom: 2px solid #111;
+	padding: 38px 0
+}
+
+.select-dot {
+	width: 28px;
+	height: 28px;
+	border: 2px solid #333;
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+	background: #fff;
+	color: #22cf3c;
+	font-size: 35px;
+	line-height: 1
+}
+
+.select-dot.checked {
+	border-color: transparent
+}
+
+.select-dot.checked::before {
+	content: "✓"
+}
+
+.cart-thumb {
+	width: 165px;
+	height: 165px;
+	object-fit: cover;
+	background: #eee
+}
+
+.cart-copy h3 {
+	font-family: Arial, sans-serif;
+	font-size: 27px;
+	letter-spacing: .03em;
+	text-transform: uppercase;
+	margin: 0 0 20px
+}
+
+.cart-copy p {
+	font-family: Arial, sans-serif;
+	font-size: 11px;
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	margin: 0 0 31px;
+	color: #555
+}
+
+.remove {
+	border: 0;
+	background: transparent;
+	border-bottom: 1px solid #111;
+	font-family: Arial, sans-serif;
+	font-size: 13px;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	font-weight: 800;
+	cursor: pointer;
+	padding: 0
+}
+
+.remove:hover {
+	transform: translateY(-1px);
+	opacity: .5;
+}
+
+.qty-stack {
+	text-align: center
+}
+
+.qty-caption,.price-caption {
+	font-family: Arial, sans-serif;
+	font-size: 8px;
+	letter-spacing: .16em;
+	text-transform: uppercase;
+	margin-top: 20px; 
+	color: #8a8a8a
+}
+
+.cart-qty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 13px;
+	margin: 2px 0 44px
+}
+
+.cart-qty button {
+	border: 0;
+	background: transparent;
+	font-size: 34px;
+	font-weight: 700;
+	cursor: pointer;
+	line-height: 1
+}
+
+.cart-qty input {
+	width: 34px;
+	height: 42px;
+	border: 2px solid #111;
+	text-align: center;
+	padding: 0
+}
+
+.item-price {
+	font-family: Arial, sans-serif;
+	font-size: 26px;
+	font-weight: 800;
+	margin-top: 5px; 
+	text-align: right
+	
+}
+
+.summary {
+	border: 2px solid #111;
+	margin-top: 70px;
+	padding: 58px 42px 52px;
+	align-self: start;
+	position: sticky;
+	top: 96px
+}
+
+.summary h2 {
+	font-family: Arial, sans-serif;
+	font-size: 31px;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+	font-weight: 500;
+	margin: 0 0 26px;
+	border-bottom: 2px solid #111;
+	padding-bottom: 24px
+}
+
+.sum-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 40px 0;
+	font-family: Arial, sans-serif;
+	font-weight: 800
+}
+
+.sum-row .label {
+	font-family: Arial, sans-serif;
+	font-size: 11px;
+	letter-spacing: .1em;
+	text-transform: uppercase
+}
+
+.sum-total {
+	border-top: 3px solid #111;
+	margin-top: 62px;
+	padding-top: 32px;
+	display: flex;
+	align-items: end;
+	justify-content: space-between
+}
+
+.sum-total .label {
+	font-family: Arial, sans-serif;
+	font-size: 13px;
+	letter-spacing: .38em;
+	text-transform: uppercase;
+	font-weight: 800
+}
+
+.sum-total .amount {
+	font-family: Arial, sans-serif;
+	font-size: 38px;
+	font-weight: 900
+}
+
+.checkout-btn {
+	margin-top: 36px;
+	width: 100%;
+	height: 91px;
+	background: #000;
+	color: #fff;
+	border: 0;
+	font-family: Arial, sans-serif;
+	letter-spacing: .18em;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 800;
+	cursor: pointer
+}
+
+.secure {
+	display: flex;
+	align-items: center;
+	color: #6c9a67;
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	letter-spacing: .12em;
+	padding: 30px 99px 0px;
+	text-transform: uppercase
+}
 
 .modal {
 	position: fixed;
