@@ -721,6 +721,13 @@ function showToast(text){
         navigateSearch($('#searchInput').value.trim() || 'Cold colour');
       });
     }
+       const checkoutForm = $('#checkoutForm');
+    if(checkoutForm){
+      checkoutForm.addEventListener('submit', e=>{
+        e.preventDefault();
+        finalizePayment();
+      });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
