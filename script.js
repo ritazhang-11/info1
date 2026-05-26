@@ -225,25 +225,18 @@
   let currentSort = null;
 
   function navigateSearch(term){
-    location.href = `search-results.html?q=${encodeURIComponent(term || '')}`;
+    location.href = `product-list.html?q=${encodeURIComponent(term || '')}`;
   }
 
   function chooseLayout(type){
     const urlParams = new URLSearchParams(window.location.search);
     const query = urlParams.get('q');
     const qParam = query ? `?q=${encodeURIComponent(query)}` : '';
-    const current = path();
-    const isSearch = current.startsWith('search-results');
-    const isList = current.startsWith('product-list');
     if(type === 'vertical'){
-      if(isSearch) location.href = 'search-results-vertical.html' + qParam;
-      else if(isList) location.href = 'product-list2.html';
-      else location.href = 'product-list2.html';
+      location.href = 'product-list2.html' + qParam;
       return;
-    }
-    if(isSearch) location.href = 'search-results.html' + qParam;
-    else if(isList) location.href = 'product-list.html';
-    else location.href = 'product-list.html';
+    }    
+    location.href = 'product-list.html' + qParam;
   }
 
   function matchesSearch(product, query) {
@@ -253,7 +246,95 @@
 }
 
   function updateSearchLayoutLinks() {
-}
+    const query = new URLSearchParams(window.location.search).get('q');
+    const qParam = query ? `?q=${encodeURIComponent(query)}` : '';
+    $$('.view-icons a.layout-icon').forEach(link => {
+      const isVertical = link.classList.contains('three') === false && link.querySelectorAll('span').length <= 4;
+      if (isVertical) {
+        link.href = 'product-list2.html' + qParam;
+      } else {
+        link.href = 'product-list.html' + qParam;
+      }
+    });
+  }
+  function initSearchInput() {
+    const input = $('#searchInput');
+    if (!input) return;
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        closeModals();
+        navigateSearch(input.value.trim());
+      }
+    });
+  }
+  
+  function clearFieldErrors() {
+    $$('.field-error').forEach(el => el.classList.remove('show'));
+    $$('#checkoutForm input').forEach(el => el.classList.remove('is-invalid'));
+  }
+  function showFieldError(fieldId, message) {
+    const input = document.getElementById(fieldId);
+    const errorEl = document.querySelector(`[data-error-for="${fieldId}"]`);
+    if (input) input.classList.add('is-invalid');
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.add('show');
+    }
+  }
+
+  function validateCheckoutForm() {
+    clearFieldErrors();
+    let valid = true;
+    const first = $('#first')?.value.trim() || '';
+    const last = $('#last')?.value.trim() || '';
+    const email = $('#email')?.value.trim() || '';
+    const wallet = $('#wallet')?.value.replace(/\s/g, '') || '';
+
+    if (first.length < 2) {
+      showFieldError('first', 'First name must be at least 2 characters.');
+      valid = false;
+    }
+    if (last.length < 2) {
+      showFieldError('last', 'Last name must be at least 2 characters.');
+      valid = false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showFieldError('email', 'Please enter a valid email address.');
+      valid = false;
+    }
+    if (!/^\d{12,19}$/.test(wallet)) {
+      showFieldError('wallet', 'Wallet must contain 12–19 digits.');
+      valid = false;
+    }
+    return valid;
+  }
+
+  function renderCheckoutPage() {
+    const itemsEl = $('#checkoutItems');
+    if (!itemsEl) return;
+    const pending = JSON.parse(localStorage.getItem('pendingOrder') || '{"items":[],"tax":0,"total":0}');
+    if (!pending.items.length) {
+      itemsEl.innerHTML = '<p style="padding:20px;font-family:Arial,sans-serif;">No items in your order. <a href="product-list.html">Shop art</a></p>';
+    } else {
+      itemsEl.innerHTML = pending.items.map(item => `
+        <article class="checkout-item">
+          <img src="${item.image}" class="checkout-item-img" alt="${item.title}">
+          <div class="checkout-item-info">
+            <h4>${item.title}</h4>
+            <p>${item.artist} × ${item.qty}</p>
+          </div>
+          <div class="checkout-item-price">AUD$${(item.price * item.qty).toLocaleString()}</div>
+        </article>
+      `).join('');
+    }
+    const subNode = $('#sumSubtotal');
+    const taxNode = $('#sumTax');
+    const totalNode = $('#sumTotal');
+    if (subNode) subNode.textContent = '$' + (pending.total - pending.tax).toLocaleString();
+    if (taxNode) taxNode.textContent = '$' + pending.tax.toLocaleString();
+    if (totalNode) totalNode.textContent = '$' + pending.total.toLocaleString();
+  }
 
   function filterCards(category) {
     currentFilter = category;
@@ -271,7 +352,6 @@
     const urlParams = new URLSearchParams(window.location.search);
     const rawQuery = urlParams.get('q');
     const query = rawQuery?.toLowerCase();
-    const isVertical = grid.classList.contains('two-col');
     const wishlist = getWishlist();
     let products = [...productsData];
 
@@ -311,7 +391,7 @@
       return `
         <article class="art-card" data-price="${p.price}" data-category="${p.category}">
           <a class="art-img-wrap" href="product-pages.html?id=${p.id}">
-            <img class="${(p.id === 'neon-57' || isVertical) ? 'art-img-wide' : ''}" src="${p.image}" alt="${p.title}" />
+            <img src="${p.image}" alt="${p.title}" />
           </a>
           <div class="art-meta">
             <a href="product-pages.html?id=${p.id}">
@@ -618,6 +698,8 @@ function showToast(text){
     if(totalNode) totalNode.textContent = moneyFixed(total);
   }
 
+
+
   function handleCheckout() {
     const cart = getCart();
     if (cart.length === 0) return;
@@ -792,11 +874,22 @@ function showToast(text){
       });
     }
     initSearchInput();
-      const checkoutForm = $('#checkoutForm');
+    const checkoutForm = $('#checkoutForm');
     if(checkoutForm){
       checkoutForm.addEventListener('submit', e=>{
         e.preventDefault();
-        finalizePayment();
+         if (!validateCheckoutForm()) {
+          showToast('Please fix the highlighted fields');
+          return;
+        }
+         finalizePayment();
+      });
+      $$('#checkoutForm input').forEach(input => {
+        input.addEventListener('input', () => {
+          input.classList.remove('is-invalid');
+          const err = document.querySelector(`[data-error-for="${input.id}"]`);
+          if (err) err.classList.remove('show');
+        });
       });
     }
   }
@@ -816,6 +909,8 @@ function showToast(text){
       renderConfirmation();
     } else if (cur === 'wishlist.html') {
       renderWishlist();
+    } else if (cur === 'checkout.html') {
+      renderCheckoutPage();
     }
   });
 })();
