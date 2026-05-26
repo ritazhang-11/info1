@@ -618,6 +618,70 @@ function showToast(text){
     if(totalNode) totalNode.textContent = moneyFixed(total);
   }
 
+  function handleCheckout() {
+    const cart = getCart();
+    if (cart.length === 0) return;
+    let subtotal = 0;
+    const orderItems = [];
+    $$('.cart-item').forEach(el => {
+      if (el.querySelector('.select-dot').classList.contains('checked')) {
+        const item = cart.find(i => i.id === el.dataset.id);
+        if (item) {
+          subtotal += item.price * item.qty;
+          orderItems.push(item);
+        }
+      }
+    });
+    if (orderItems.length === 0) {
+      showToast('Please select items to checkout');
+      return;
+    }
+    const tax = Math.round(subtotal * 0.0775);
+    const total = subtotal + tax;
+    localStorage.setItem('pendingOrder', JSON.stringify({
+      items: orderItems,
+      tax: tax,
+      total: total
+    }));
+    location.href = 'checkout.html';
+  }
+
+  function finalizePayment() {
+    const pending = JSON.parse(localStorage.getItem('pendingOrder'));
+    if (!pending) return;
+    const lastOrder = {
+      ref: 'ARC-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+      items: pending.items,
+      tax: pending.tax,
+      total: pending.total,
+      customer: {
+        first: $('#first')?.value,
+        last: $('#last')?.value,
+        email: $('#email')?.value
+      }
+    };
+    localStorage.setItem('lastOrder', JSON.stringify(lastOrder));
+    saveCart(getCart().filter(ci => !pending.items.find(oi => oi.id === ci.id)));
+    localStorage.removeItem('pendingOrder');
+    location.href = 'confirmation.html';
+  }
+
+  function renderConfirmation() {
+    const refNode = $('#orderRef');
+    const receiptNode = $('#orderReceipt');
+    if (!refNode || !receiptNode) return;
+    const lastOrder = JSON.parse(localStorage.getItem('lastOrder'));
+    if (!lastOrder) {
+      receiptNode.innerHTML = '<p>No recent order found.</p>';
+      return;
+    }
+    refNode.textContent = lastOrder.ref;
+    receiptNode.innerHTML = lastOrder.items.map(item =>
+      `<div class="receipt-row"><span>${item.title} x${item.qty}</span><span>AUD${money(item.price * item.qty).replace('.00','')}</span></div>`
+    ).join('') +
+    `<div class="receipt-row muted"><span>Tax (7.75%)</span><span>AUD${money(lastOrder.tax).replace('.00','')}</span></div>
+     <div class="receipt-row receipt-total"><span>Total Paid</span><span>AUD${moneyFixed(lastOrder.total)}</span></div>`;
+  }
   function initProductQty(){
     const product = $('.product-info');
     if(!product) return;
@@ -707,6 +771,12 @@ function showToast(text){
         recalcCart();
         return;
       }
+      const checkoutBtn = e.target.closest('.checkout-btn');
+      if(checkoutBtn){
+        e.preventDefault();
+        handleCheckout();
+        return;
+      }
       if(e.target.closest('[data-back-top]')){
         e.preventDefault();
         window.scrollTo({top:0, behavior:'smooth'});
@@ -721,7 +791,8 @@ function showToast(text){
         navigateSearch($('#searchInput').value.trim() || 'Cold colour');
       });
     }
-       const checkoutForm = $('#checkoutForm');
+    initSearchInput();
+      const checkoutForm = $('#checkoutForm');
     if(checkoutForm){
       checkoutForm.addEventListener('submit', e=>{
         e.preventDefault();
@@ -741,6 +812,8 @@ function showToast(text){
       renderProductPages();
     } else if (cur === 'cart.html') {
       renderCart();
+    } else if (cur === 'confirmation.html') {
+      renderConfirmation();
     } else if (cur === 'wishlist.html') {
       renderWishlist();
     }
