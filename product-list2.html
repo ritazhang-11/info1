@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,18 +32,27 @@
         <section class="list-top">
           <div>
             <button class="filter-btn" data-open-filter aria-label="Open filter"><i></i><b></b><em></em><span></span></button>
+            <div class="filter-options">
+              <button class="filter-option" data-filter="all">All Artworks</button>
+              <button class="filter-option" data-filter="cold">Cold Colour</button>
+              <button class="filter-option" data-filter="warm">Warm Colour</button>
+              <button class="filter-option" data-sort="asc">Price: Low to High</button>
+              <button class="filter-option" data-sort="desc">Price: High to Low</button>
+            </div>
           </div>
           <div class="view-icons" aria-label="Layout switcher">
             <a class="layout-icon active" href="product-list2.html" aria-label="Vertical layout"><span></span><span></span><span></span><span></span></a>
             <a class="layout-icon three" href="product-list.html" aria-label="Horizontal layout"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></a>
           </div>
         </section>
+
         <section class="art-grid two-col">
           <!-- Data will be loaded from products.json -->
         </section>
         <div class="end-block"><button class="icon-btn tech" data-back-top>Back to the top<span class="up">⌃</span></button>
         </div>
       </main>
+      
       <footer class="footer">
   <a class="brand" href="home.html">Art Lovers Australia</a>
   <nav class="footer-nav" aria-label="Footer links">
