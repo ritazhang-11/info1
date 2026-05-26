@@ -27,7 +27,7 @@
       "category": "warm",
       "image": "assets/the-herald.jpg",
       "roomImage": "assets/herald-room.jpg",
-      "description": "The Herald captures the ethereal beauty of a shifting sky...",
+      "description": "The Herald captures the ethereal beauty of a shifting sky.",
       "specs": {
         "Medium": "Giclee Print on Archival Cotton Rag",
         "Edition": "Limited edition of 25",
@@ -35,7 +35,7 @@
         "Framing": "Unframed",
         "Paper Weight": "310gsm"
       },
-      "aboutArtist": "Emma Coombes is a contemporary landscape artist..."
+      "aboutArtist": "Emma Coombes is a contemporary landscape artist."
     },
     {
       "id": "neon-57",
@@ -45,7 +45,7 @@
       "category": "warm",
       "image": "assets/neon-57.png",
       "roomImage": "assets/neon-57.png",
-      "description": "A vibrant exploration of urban energy...",
+      "description": "A vibrant exploration of urban energy.",
       "specs": {
         "Medium": "Acrylic on Canvas",
         "Edition": "Original Artwork",
@@ -53,7 +53,7 @@
         "Framing": "Stretched Canvas",
         "Paper Weight": "N/A"
       },
-      "aboutArtist": "Mark Rein is known for his large-scale abstract works..."
+      "aboutArtist": "Mark Rein is known for his large-scale abstract works."
     },
     {
       "id": "zen-xii",
@@ -63,7 +63,7 @@
       "category": "cold",
       "image": "assets/zen-xii.jpg",
       "roomImage": "assets/city-room.png",
-      "description": "Zen XII is a study in minimalism...",
+      "description": "Zen XII is a study in minimalism.",
       "specs": {
         "Medium": "Fine Art Print",
         "Edition": "Limited edition of 50",
@@ -71,7 +71,7 @@
         "Framing": "Unframed",
         "Paper Weight": "300gsm"
       },
-      "aboutArtist": "Elie Bittoun explores themes of silence and space..."
+      "aboutArtist": "Elie Bittoun explores themes of silence and space."
     },
     {
       "id": "wishing-tree",
@@ -81,7 +81,7 @@
       "category": "warm",
       "image": "assets/wishing-tree.jpg",
       "roomImage": "assets/herald-room.jpg",
-      "description": "A whimsical depiction of a mythical tree...",
+      "description": "A whimsical depiction of a mythical tree.",
       "specs": {
         "Medium": "Oil on Canvas",
         "Edition": "Original Artwork",
@@ -89,7 +89,7 @@
         "Framing": "Custom Frame",
         "Paper Weight": "N/A"
       },
-      "aboutArtist": "Peter Masters is a storyteller through paint..."
+      "aboutArtist": "Peter Masters is a storyteller through paint."
     },
     {
       "id": "city-beach",
@@ -100,7 +100,7 @@
       "category": "cold",
       "image": "assets/city-beach.jpg",
       "roomImage": "assets/city-room.png",
-      "description": "Aerial perspective of the coastline...",
+      "description": "Aerial perspective of the coastline.",
       "specs": {
         "Medium": "Photography",
         "Edition": "Limited edition of 10",
@@ -108,7 +108,7 @@
         "Framing": "Shadow Box",
         "Paper Weight": "310gsm RAG"
       },
-      "aboutArtist": "Chris Dark is a coastal photographer..."
+      "aboutArtist": "Chris Dark is a coastal photographer."
     },
     {
       "id": "cirrus",
@@ -119,7 +119,7 @@
       "category": "cold",
       "image": "assets/cirrus.jpg",
       "roomImage": "assets/city-room.png",
-      "description": "Exploring meteorological phenomena...",
+      "description": "Exploring meteorological phenomena.",
       "specs": {
         "Medium": "Digital Fine Art Print",
         "Edition": "Limited edition of 30",
@@ -127,7 +127,7 @@
         "Framing": "Unframed",
         "Paper Weight": "280gsm"
       },
-      "aboutArtist": "Grayson Cooke is an interdisciplinary artist..."
+      "aboutArtist": "Grayson Cooke is an interdisciplinary artist."
     },
     {
       "id": "zebra",
@@ -137,7 +137,7 @@
       "category": "warm",
       "image": "assets/zebra-on-black.jpg",
       "roomImage": "assets/herald-room.jpg",
-      "description": "Monochromatic portrait of a zebra...",
+      "description": "Monochromatic portrait of a zebra.",
       "specs": {
         "Medium": "Charcoal and Pastel",
         "Edition": "Original Artwork",
@@ -145,7 +145,7 @@
         "Framing": "Framed under glass",
         "Paper Weight": "350gsm"
       },
-      "aboutArtist": "Peter Masters is a master of texture and form..."
+      "aboutArtist": "Peter Masters is a master of texture and form."
     },
     {
       "id": "another-place",
@@ -155,7 +155,7 @@
       "category": "cold",
       "image": "assets/another-place.jpg",
       "roomImage": "assets/city-room.png",
-      "description": "Coastal isolation and distant horizon...",
+      "description": "Coastal isolation and distant horizon.",
       "specs": {
         "Medium": "Mixed Media",
         "Edition": "Original Artwork",
@@ -163,7 +163,7 @@
         "Framing": "Oak Floating Frame",
         "Paper Weight": "N/A"
       },
-      "aboutArtist": "Chris Dark's work is held in private collections..."
+      "aboutArtist": "Chris Dark's work is held in private collections."
     },
     {
       "id": "endurance",
@@ -173,7 +173,7 @@
       "category": "cold",
       "image": "assets/endurance.jpg",
       "roomImage": "assets/city-room.png",
-      "description": "Sea energy against steadfast cliffs...",
+      "description": "Sea energy against steadfast cliffs.",
       "specs": {
         "Medium": "Oil on Canvas",
         "Edition": "Original Artwork",
@@ -181,7 +181,7 @@
         "Framing": "Stretched",
         "Paper Weight": "N/A"
       },
-      "aboutArtist": "Chris Dark spends weeks on location..."
+      "aboutArtist": "Chris Dark spends weeks on location."
     },
     {
       "id": "portrait-study",
@@ -191,7 +191,7 @@
       "category": "warm",
       "image": "assets/intro-portrait.jpg",
       "roomImage": "assets/herald-room.jpg",
-      "description": "Dramatic light and shadow on human form...",
+      "description": "Dramatic light and shadow on human form.",
       "specs": {
         "Medium": "Acrylic on Paper",
         "Edition": "Original Artwork",
@@ -199,7 +199,7 @@
         "Framing": "Black Modern Frame",
         "Paper Weight": "400gsm"
       },
-      "aboutArtist": "Emma's portraiture is sought after..."
+      "aboutArtist": "Emma's portraiture is sought after."
     },
     {
       "id": "still-life-vases",
@@ -209,7 +209,7 @@
       "category": "warm",
       "image": "assets/intro-vases.jpg",
       "roomImage": "assets/herald-room.jpg",
-      "description": "Modern take on classic still life...",
+      "description": "Modern take on classic still life.",
       "specs": {
         "Medium": "Giclee Print",
         "Edition": "Limited edition of 100",
@@ -217,7 +217,7 @@
         "Framing": "Minimalist White Frame",
         "Paper Weight": "310gsm"
       },
-      "aboutArtist": "Elie's still life works are celebrated..."
+      "aboutArtist": "Elie's still life works are celebrated."
     },
   ];
 
@@ -663,7 +663,7 @@ function showToast(text){
           <button class="remove" data-remove-id="${item.id}">Remove</button>
         </div>
         <div class="qty-stack">
-          <div class="qty-caption">QTY</div>
+          <div class="qty-caption">Quantity</div>
           <div class="cart-qty">
             <button data-cart-qty="minus" data-id="${item.id}">−</button>
             <input type="text" value="${item.qty}" readonly />
