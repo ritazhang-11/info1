@@ -240,10 +240,22 @@
   }
 
   function matchesSearch(product, query) {
-   const q = query.toLowerCase().trim();
-   const text = (product.title + product.artist + product.category).toLowerCase();
-   return text.includes(q);
-}
+    const q = query.toLowerCase().trim();
+    if (!q) return true;
+    const text = `${product.title} ${product.artist} ${product.category}`.toLowerCase();
+    if (text.includes(q)) return true;
+    if (/\bcold\b/.test(q) && product.category === 'cold') return true;
+    if (/\bwarm\b/.test(q) && product.category === 'warm') return true;
+    return false;
+  }
+
+  function clearSearchQueryFromUrl() {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has('q')) return;
+    url.searchParams.delete('q');
+    const next = url.search ? `${url.pathname}${url.search}` : url.pathname;
+    history.replaceState(null, '', next);
+  }
 
   function updateSearchLayoutLinks() {
     const query = new URLSearchParams(window.location.search).get('q');
@@ -267,6 +279,46 @@
         navigateSearch(input.value.trim());
       }
     });
+  }
+
+  const DEFAULT_SEARCH_SUGGESTIONS = ['Cold', 'Warm', 'Emma Coombes'];
+  const DEFAULT_SEARCH_TERM = 'Cold colour';
+
+  function getSearchInputDefault() {
+    const query = new URLSearchParams(window.location.search).get('q');
+    return query || DEFAULT_SEARCH_TERM;
+  }
+  
+  function getSearchSuggestions() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('artSearchSuggestions') || 'null');
+      if (Array.isArray(saved) && saved.length) return saved.filter(Boolean);
+    } catch (_) {}
+    return [...DEFAULT_SEARCH_SUGGESTIONS];
+  }
+  
+  function saveSearchSuggestions(list) {
+    localStorage.setItem('artSearchSuggestions', JSON.stringify(list));
+  }
+
+  function removeSearchSuggestion(term) {
+    const next = getSearchSuggestions().filter(item => item !== term);
+    saveSearchSuggestions(next);
+    renderSearchSuggestions();
+  }
+  
+  function renderSearchSuggestions() {
+    const container = $('#searchSuggestions');
+    if (!container) return;
+    const items = getSearchSuggestions();
+    container.innerHTML = items.length
+      ? items.map(term => `
+          <div class="suggestion-item">
+            <button type="button" class="suggestion-term" data-search-term="${term.replace(/"/g, '&quot;')}">${term}</button>
+            <button type="button" class="suggestion-remove" data-remove-suggestion="${term.replace(/"/g, '&quot;')}" aria-label="Remove ${term.replace(/"/g, '&quot;')}">×</button>
+          </div>
+        `).join('')
+      : '<p class="suggestions-empty">No recent searches</p>';
   }
   
   function clearFieldErrors() {
@@ -338,6 +390,9 @@
 
   function filterCards(category) {
     currentFilter = category;
+    if (category === 'cold' || category === 'warm') {
+      clearSearchQueryFromUrl();
+    }
     renderProductList();
   }
 
@@ -492,22 +547,39 @@
     const gallery = $('.product-gallery');
     if (!gallery) return;
     const img = $('img.main-art', gallery);
+    const pager = $('.pager', gallery);
     const dots = $$('.pager span', gallery);
-    if (!img || dots.length < 2) return;
+    if (!img) return;
+
+    if (!roomSrc) {
+      if (pager) pager.style.display = 'none';
+      return;
+    }
+
+    if (pager) pager.style.display = 'flex';
 
     const sources = [imgSrc, roomSrc];
     let current = 0;
+    sources.forEach(src => { new Image().src = src; });
 
     function switchImg(index) {
-      index = index % sources.length;
+      index = ((index % sources.length) + sources.length) % sources.length;
       current = index;
       img.classList.add('fade');
-      setTimeout(() => {
+      const loader = new Image();
+      loader.onload = () => {
         img.src = sources[current];
         dots.forEach((d, i) => d.classList.toggle('active', i === current));
         img.classList.remove('fade');
-      }, 300);
+      };    
+      loader.onerror = () => img.classList.remove('fade');
+      loader.src = sources[current];
     }
+
+    dots.forEach((dot, i) => {
+      dot.style.display = i < sources.length ? '' : 'none';
+      dot.addEventListener('click', () => switchImg(i));
+    });
     img.style.cursor = 'pointer';
     img.addEventListener('click', () => switchImg(current + 1));
   }
@@ -521,18 +593,14 @@ function injectModals(){
         <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Search">
           <button class="modal-close" data-close-modal aria-label="Close">×</button>
           <form class="search-form" id="searchForm">
-            <input id="searchInput" type="search" autocomplete="off" value="" aria-label="Search artwork" />
+            <input id="searchInput" type="search" autocomplete="off" value="Cold colour" aria-label="Search artwork" />
             <button type="submit" aria-label="Submit search">
               <span class="icon search"></span>
             </button>
           </form>
-          <div class="suggestions">
-            <button data-search-term="Cold">Cold</button>
-            <button data-search-term="Warm">Warm</button>
-            <button data-search-term="Emma Coombes">Emma Coombes</button>
+          <div class="suggestions" id="searchSuggestions"></div>
           </div>
         </div>
-      </div>
       <div class="toast" id="toast">Added to cart</div>
     `;
     document.body.appendChild(wrap);
@@ -543,6 +611,11 @@ function openModal(id){
   if(!modal) return;
   modal.classList.add('show');
   modal.setAttribute('aria-hidden','false');
+  if (id === 'searchModal') {
+    renderSearchSuggestions();
+    const input = $('#searchInput', modal);
+    if (input) input.value = getSearchInputDefault();
+  }
   const input = $('#searchInput', modal);
   if(input) setTimeout(()=>input.focus(), 40);
 }
@@ -804,6 +877,14 @@ function showToast(text){
         closeModals();
         return;
       }
+
+         const removeSuggestion = e.target.closest('[data-remove-suggestion]');
+      if (removeSuggestion) {
+        e.preventDefault();
+        e.stopPropagation();
+        removeSearchSuggestion(removeSuggestion.dataset.removeSuggestion);
+        return;
+      }
       const suggestion = e.target.closest('[data-search-term]');
       if(suggestion){
         e.preventDefault();
@@ -870,7 +951,7 @@ function showToast(text){
       searchForm.addEventListener('submit', e=>{
         e.preventDefault();
         closeModals();
-        navigateSearch($('#searchInput').value.trim() || 'Cold colour');
+        navigateSearch($('#searchInput').value.trim() || DEFAULT_SEARCH_TERM);
       });
     }
     initSearchInput();
@@ -896,6 +977,7 @@ function showToast(text){
 
   document.addEventListener('DOMContentLoaded', () => {
     injectModals();
+    renderSearchSuggestions();
     bindEvents();
     initProductQty();
     const cur = path();
