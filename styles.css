@@ -2,11 +2,24 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--page-pad-left: clamp(14px, 2.78vw + 3px, 50px);
+	--page-pad-right: clamp(14px, 2.5vw + 3px, 45px);
+	--header-gutter-left: var(--page-pad-left);
+	--header-gutter-right: var(--page-pad-right);
+	--brand-size: clamp(14px, 10px + 0.97vw, 24px);
+	--header-icon-gap: clamp(6px, -4px + 4.31vw, 58px);
+	--section-gap: clamp(20px, 3vw, 48px);
+	--font-title: 'Bebas Neue', sans-serif;
+	--font-body: 'Cinzel', serif;
+}
+
 html {
 	scroll-behavior: smooth;
 	background: #fff;
 	color: #050505;
 	overflow-x: clip;
+	scrollbar-gutter: stable;
 }
 
 body {
@@ -15,6 +28,7 @@ body {
 	color: #050505;
 	overflow-x: clip;
 	max-width: 100%;
+	font-family: var(--font-body);
 }
 
 a {
@@ -56,37 +70,45 @@ img {
     box-shadow: 0 4px 4px rgba(25, 25, 25, .08);
     border-bottom: 0;
     height: 65px;
-    padding: 10px 45px 15px 50px;
+    padding: 10px var(--header-gutter-right) 15px var(--header-gutter-left);
 }
 
 .site-header {
 	height: 60px;
+	min-height: 56px;
 	border-bottom: 1px solid #111;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 48px;
+	gap: clamp(8px, 2vw, 16px);
+	padding: 0 var(--header-gutter-right) 0 var(--header-gutter-left);
 	background: #fff;
 	position: sticky;
 	top: 0;
 	z-index: 80;
+	min-width: 0;
 }
 
 .brand {
-	font-family: Arial, sans-serif;
-	font-size: 24px;
-	line-height: 1;
+	font-family: var(--font-title);
+	font-size: var(--brand-size);
+	line-height: 1.15;
 	font-weight: 700;
 	letter-spacing: .02em;
 	white-space: nowrap;
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .header-icons {
 	display: flex;
 	align-items: center;
-	gap: 58px;
+	gap: var(--header-icon-gap);
 	font-size: 34px;
 	line-height: 1;
+	flex: 0 0 auto;
 }
 
 .icon-btn {
@@ -131,7 +153,7 @@ img {
 }
 
 .content {
-	padding: 0 48px;
+	padding: 0 var(--page-pad-right) 0 var(--page-pad-left);
 }
 
 .tech {
@@ -156,15 +178,16 @@ img {
 	border: 0;
 	background: #111;
 	color: #fff;
-	padding: 18px 42px;
+	padding: clamp(12px, 1.5vw, 18px) clamp(18px, 3vw, 42px);
 	font-family: Arial, sans-serif;
-	font-size: 18px;
-	letter-spacing: .22em;
+	font-size: clamp(13px, 0.55vw + 11px, 18px);
+	letter-spacing: clamp(.08em, 0.12vw + 0.06em, .22em);
 	text-transform: uppercase;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 56px;
+	min-height: clamp(44px, 8vw, 56px);
+	max-width: 100%;
 	cursor: pointer;
 	transition: transform .16s ease, opacity .16s ease;
 }
@@ -181,12 +204,13 @@ img {
 }
 
 .breadcrumb {
-	font-size: 16px;
+	font-size: clamp(14px, 0.4vw + 12px, 16px);
 	letter-spacing: .02em;
 	display: flex;
 	align-items: center;
-	gap: 15px;
-    margin: 16px 0 16px 48px;
+	flex-wrap: wrap;
+	gap: clamp(8px, 1.5vw, 15px);
+	margin: 16px 0;
 }
 
 .breadcrumb .chev {
@@ -198,9 +222,10 @@ img {
 .filter-options {
 	display: none;
 	align-items: center;
-	gap: 20px;
+	gap: 12px;
 	flex-wrap: wrap;
-	margin-left: 10px;
+	margin-left: 0;
+	max-width: 100%;
 }
 
 .filter-options.show {
@@ -216,32 +241,46 @@ img {
 	white-space: nowrap;
 }
 
-.filter-option:hover {
-	background: #000;
-	color: #fff;
+.filter-option:focus {
+	outline: none;
+}
+
+@media (hover: hover) {
+	.filter-option:hover {
+		background: #000;
+		color: #fff;
+	}
 }
 
 .list-top>div:first-child {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 8px;
+	min-width: 0;
+	flex: 1 1 220px;
 }
 
 .list-top {
 	display: flex;
-	align-items: start;
+	align-items: flex-start;
 	justify-content: space-between;
-	margin-bottom: 46px;
+	flex-wrap: wrap;
+	gap: var(--section-gap);
+	margin-bottom: clamp(28px, 4vw, 46px);
 }
 
-.tools{
+.tools {
 	display: flex;
 	align-items: center;
-	gap: 30px
+	flex-wrap: wrap;
+	gap: clamp(12px, 2.5vw, 30px);
+	flex-shrink: 0;
 }
 
 .filter-btn {
-	margin-left: 48px;
+	margin-left: 0;
+	flex-shrink: 0;
 	background: transparent;
 	border: 0;
 	cursor: pointer;
@@ -304,13 +343,14 @@ img {
 
 .view-icons {
 	display: flex;
-	gap: 30px;
-	margin-right: 36px;
+	flex-wrap: wrap;
+	gap: clamp(12px, 2vw, 30px);
+	margin-right: 0;
 }
 
 .layout-icon {
-	width: 70px;
-	height: 70px;
+	width: clamp(48px, 6vw, 70px);
+	height: clamp(48px, 6vw, 70px);
 	background: #e5e5e5;
 	border: 0;
 	display: grid;
@@ -333,23 +373,37 @@ img {
 
 .hero {
 	position: relative;
-	height: 730px;
+	--hero-safe-height: calc(255px + 200px + 55px + 4rem + 64px + 100px);
+	height: max(730px, var(--hero-safe-height));
+	min-height: var(--hero-safe-height);
 	background: #ddd;
 	overflow: hidden;
+	isolation: isolate;
 }
 
 .hero img {
+	position: absolute;
+	inset: 0;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	filter: saturate(.98);
+	z-index: 0;
 }
 
 .hero-copy {
 	position: absolute;
 	left: 55px;
+	right: 100px;
 	top: 255px;
 	color: #111;
+	z-index: 2;
+	pointer-events: none;
+}
+
+.hero-copy h1,
+.hero-action-row {
+	pointer-events: auto;
 }
 
 .hero-copy h1 {
@@ -357,20 +411,35 @@ img {
 	font-size: 40px;
 	letter-spacing: .11em;
 	font-weight: 500;
+	line-height: 1.15;
 }
 
-.hero-copy h2 {
-	margin: 10px;
+.hero-action-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: clamp(16px, 3vw, 40px);
+	width: 100%;
+	margin: 0 10px;
+}
+
+.hero-action-row h2 {
+	margin: 0;
+	flex: 1 1 auto;
+	min-width: 0;
 	font-size: 40px;
 	letter-spacing: .11em;
 	font-weight: 500;
+	line-height: 1.15;
+	white-space: normal;
+	overflow-wrap: anywhere;
 }
 
 .hero .shop-now {
-	position: absolute;
-	right: 100px;
-	bottom: 109px;
+	position: static;
+	flex: 0 0 auto;
 	width: 338px;
+	max-width: min(338px, 46%);
 	height: 64px;
 	background: #111;
 	color: #fff;
@@ -379,6 +448,8 @@ img {
 	border: 0;
 	font-size: 19px;
 	cursor: pointer;
+	white-space: nowrap;
+	padding: 0 12px;
 }
 
 .promotion {
@@ -412,7 +483,7 @@ img {
 
 .home-intro {
 	height: auto;
-	padding: 70px 48px;
+	padding: clamp(40px, 5vw, 70px) var(--page-pad-right) clamp(40px, 5vw, 70px) var(--page-pad-left);
 	position: static;
 }
 
@@ -421,8 +492,8 @@ img {
 .intro-grid-mid,
 .intro-bridge-row {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(220px, 260px) minmax(0, 1fr);
-	gap: 28px 20px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(20px, 2.5vw, 28px) clamp(16px, 2vw, 20px);
 	max-width: 1180px;
 	margin: 0 auto;
 	align-items: center;
@@ -461,7 +532,7 @@ img {
 .intro-photo {
 	aspect-ratio: 1 / 1;
 	width: 100%;
-	max-width: 300px;
+	max-width: min(300px, 100%);
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -522,7 +593,7 @@ img {
 	width: 100%;
 	max-width: none;
 	text-align: center;
-	font-size: 19px;
+	font-size: clamp(15px, 1.4vw + 10px, 19px);
 	line-height: 1.5;
 	margin: 0;
 }
@@ -565,10 +636,10 @@ img {
 
 .art-grid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 68px 78px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(28px, 4vw, 68px) clamp(32px, 5vw, 78px);
 	max-width: 1240px;
-	margin: 0 auto 100px;
+	margin: 0 auto clamp(60px, 8vw, 100px);
 	align-items: start;
 }
 
@@ -580,8 +651,8 @@ img {
 
 .art-card {
 	background: #ddd;
-	padding: 20px 30px 18px;
-	min-height: 385px;
+	padding: clamp(16px, 2vw, 20px) clamp(18px, 2.5vw, 30px) clamp(14px, 2vw, 18px);
+	min-height: clamp(260px, 34vw, 385px);
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -627,9 +698,13 @@ img {
 
 .art-meta {
 	display: grid;
-	grid-template-columns: 1fr auto;
+	grid-template-columns: minmax(0, 1fr) auto;
 	gap: 8px;
-	align-items: center;
+	align-items: start;
+}
+
+.art-meta > div:first-child {
+	min-width: 0;
 }
 
 .art-title {
@@ -637,6 +712,7 @@ img {
 	letter-spacing: .08em;
 	text-transform: uppercase;
 	margin: 0;
+	overflow-wrap: anywhere;
 }
 
 .art-artist {
@@ -747,19 +823,26 @@ img {
 
 .product-gallery .pager{ 
 	display: flex;
+	align-items: center;
 	gap: 20px;
 	justify-content: center;
-	margin-top: 12px
+	margin-top: 12px;
+	line-height: 0;
 }
 
 .product-gallery .pager span{
-	height:6px;
-	width:76px;
-	background:#bfbfbf
+	display: block;
+	flex: 0 0 auto;
+	height: 6px;
+	width: 76px;
+	background: #bfbfbf;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
 }
 
 .product-gallery .pager span.active{
-	background: #111
+	background: #111;
 }
 
 .product-info {
@@ -775,13 +858,14 @@ img {
 
 .product-title {
 	font-family: Arial, sans-serif;
-	font-size: 64px;
-	line-height: .9;
+	font-size: clamp(28px, 4.5vw, 64px);
+	line-height: 1.05;
 	letter-spacing: -.02em;
 	text-transform: uppercase;
 	margin: 0 0 24px;
 	font-weight: 700;
 	color: #242424;
+	word-break: break-word;
 }
 
 .product-info .byline {
@@ -863,10 +947,11 @@ img {
 .qty-control {
 	display: flex;
 	align-items: center;
-	gap: 30px;
+	flex-wrap: wrap;
+	gap: clamp(12px, 2vw, 30px);
 	font-family: Arial, sans-serif;
-	font-size: 20px;
-	font-weight: 500
+	font-size: clamp(16px, 2vw, 20px);
+	font-weight: 500;
 }
 
 .qty-control button {
@@ -891,10 +976,10 @@ img {
 
 .product-actions {
 	display: grid;
-	grid-template-columns: 1fr 4fr;
-	gap: 20px;
+	grid-template-columns: minmax(48px, 1fr) minmax(0, 4fr);
+	gap: clamp(12px, 2vw, 20px);
 	margin-top: 50px;
-	align-items: stretch
+	align-items: stretch;
 }
 
 .wish-btn {
@@ -1001,19 +1086,19 @@ img {
 
 .cart-layout {
 	display: grid;
-	grid-template-columns: 1fr 452px;
-	gap: 132px;
-	padding: 0 48px 106px
+	grid-template-columns: minmax(0, 1fr) minmax(280px, 452px);
+	gap: clamp(40px, 8vw, 132px);
+	padding: 0 var(--page-pad-right) clamp(60px, 8vw, 106px) var(--page-pad-left);
 }
 
 .cart-title {
 	font-family: Arial, sans-serif;
-	font-size: 64px;
-	line-height: .95;
+	font-size: clamp(32px, 5vw, 64px);
+	line-height: 1.05;
 	text-transform: uppercase;
 	letter-spacing: .01em;
 	font-weight: 500;
-	margin: 74px 0 72px
+	margin: clamp(40px, 6vw, 74px) 0 clamp(36px, 5vw, 72px);
 }
 
 .cart-title span {
@@ -1028,11 +1113,11 @@ img {
 
 .cart-item {
 	display: grid;
-	grid-template-columns: 42px 170px 1fr 118px;
+	grid-template-columns: 42px minmax(72px, 170px) minmax(0, 1fr) minmax(72px, auto);
 	gap: 22px;
-	align-items: center;
+	align-items: start;
 	border-bottom: 2px solid #111;
-	padding: 38px 0
+	padding: 38px 0;
 }
 
 .select-dot {
@@ -1063,12 +1148,17 @@ img {
 	background: #eee
 }
 
+.cart-copy {
+	min-width: 0;
+}
+
 .cart-copy h3 {
 	font-family: Arial, sans-serif;
-	font-size: 27px;
+	font-size: clamp(18px, 2.5vw, 27px);
 	letter-spacing: .03em;
 	text-transform: uppercase;
-	margin: 0 0 20px
+	margin: 0 0 20px;
+	overflow-wrap: anywhere;
 }
 
 .cart-copy p {
@@ -1139,10 +1229,11 @@ img {
 
 .item-price {
 	font-family: Arial, sans-serif;
-	font-size: 26px;
+	font-size: clamp(18px, 2.5vw, 26px);
 	font-weight: 800;
 	margin-top: 5px;
-	text-align: right
+	text-align: right;
+	white-space: nowrap;
 }
 
 .summary {
@@ -1450,6 +1541,19 @@ img {
 	text-transform: capitalize;
 }
 
+.search-form input[type="search"]::-webkit-search-cancel-button,
+.search-form input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+	appearance: none;
+	display: none;
+}
+
+.search-form input[type="search"]::-ms-clear {
+	display: none;
+	width: 0;
+	height: 0;
+}
+
 .search-form button {
 	border: 0;
 	background: transparent;
@@ -1466,7 +1570,7 @@ img {
 	text-transform: capitalize;
 }
 
-.suggestion-row {
+.suggestion-item {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -1474,40 +1578,50 @@ img {
 }
 
 .suggestion-term {
-	flex: 1;
+	flex: 1 1 auto;
 	min-width: 0;
 	text-align: left;
 	background: transparent;
 	border: 0;
 	cursor: pointer;
-	font-family: Arial, sans-serif;
-	font-size: 28px;
-	letter-spacing: .06em;
-	text-transform: capitalize;
+	font: inherit;
+	letter-spacing: inherit;
+	text-transform: inherit;
 	padding: 0;
 }
 
-.suggestions button {
-	text-align: left;
-	background: transparent;
-	border: 0;
-	cursor: pointer;
+.suggestion-term:hover {
+	text-decoration: underline;
 }
 
 .suggestion-remove {
-	flex-shrink: 0;
+	flex: 0 0 auto;
+	width: 32px;
+	height: 32px;
 	border: 0;
 	background: transparent;
-	cursor: pointer;
-	font-family: Arial, sans-serif;
+	color: #111;
 	font-size: 28px;
 	line-height: 1;
-	color: #111;
-	padding: 4px 8px;
+	cursor: pointer;
+	padding: 0;
+	display: grid;
+	place-items: center;
+	opacity: .55;
+	transition: opacity .16s ease, transform .16s ease;
 }
 
 .suggestion-remove:hover {
-	opacity: .55;
+	opacity: 1;
+	transform: scale(1.08);
+}
+
+.suggestions-empty {
+	margin: 0;
+	font-size: 18px;
+	color: #888;
+	text-transform: none;
+	letter-spacing: .02em;
 }
 
 .filter-modal .modal-panel {
@@ -1577,28 +1691,35 @@ img {
 }
 
 .footer {
-	height: 74px;
+	min-height: 74px;
+	height: auto;
 	border-top: 1px solid #111;
 	background: #ddd;
 	display: flex;
 	align-items: center;
-	gap: 20px;
-	padding: 0 48px;
+	flex-wrap: wrap;
+	gap: clamp(12px, 2vw, 20px);
+	padding: 12px var(--page-pad-right) 12px var(--page-pad-left);
 	margin: 0 auto;
 }
 
 .footer .brand {
-	font-size: 23px;
-	flex: 1;
+	font-size: clamp(16px, 1.5vw, 23px);
+	flex: 1 1 180px;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .footer-nav {
 	display: flex;
-	gap: 38px;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: clamp(12px, 2.5vw, 38px);
 	font-family: Arial, sans-serif;
-	font-size: 11px;
+	font-size: clamp(8px, 0.8vw + 6px, 11px);
 	font-weight: 700;
-	letter-spacing: .18em;
+	letter-spacing: clamp(.1em, 0.2vw, .18em);
 	text-transform: uppercase;
 }
 
@@ -1610,7 +1731,6 @@ img {
 	color: #757474;
 	white-space: nowrap;
 }
-
 
 @media (max-width: 1100px) {
 	.site-header {
@@ -2365,82 +2485,3 @@ img {
 		margin-bottom: 24px;
 	}
 }
-
-
-/* 我加的DESKTOP — 1440×1024
-@media (min-width: 1300px) {
-  .content,
-  .site-header,
-  .footer {
-    max-width: 1360px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .hero {
-    height: 700px;
-  }
-
-  .art-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 56px;
-  }
-}
-
-我加的MOBILE — 390×844 (iPhone 13 / 14) 
-@media (max-width: 390px) {
-  .site-header {
-    padding: 16px;
-  }
-
-  .content {
-    padding: 0 16px;
-  }
-
-  .hero {
-    height: 400px;
-  }
-
-  .hero-copy h1 {
-    font-size: 32px;
-  }
-
-  .intro-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .art-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .list-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .cart-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .checkout-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .checkout-left,
-  .checkout-right {
-    padding: 30px 20px;
-  }
-
-  .big-title {
-    font-size: 28px;
-  }
-
-  .footer {
-    padding: 24px 16px;
-  }
-}
-*/
