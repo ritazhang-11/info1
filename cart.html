@@ -26,15 +26,32 @@
     </a>
   </nav>
 </header>
-  <main class="cart-layout">
-    <section>
-      <nav class="breadcrumb"><a href="home.html">Home</a><span class="chev">›</span><a href="product-list.html">List</a><span class="chev">›</span><span>Cart</span></nav>
-      <h1 class="cart-title">Cart<span>Your collection</span></h1>
-      <div class="cart-list">
-        <!-- Items will be loaded from localStorage -->
-      </div>
-    </section>
-    <aside class="summary"><h2>Order Summary</h2><div class="sum-row"><span class="label">Subtotal</span><span id="summarySubtotal">$1,600</span></div><div class="sum-row"><span class="label">Tax</span><span id="summaryTax">$124</span></div><div class="sum-row"><span class="label">Shipping</span><span>$0</span></div><div class="sum-total"><span class="label">Total Amount</span><span class="amount" id="summaryTotal">$1,724.00</span></div><button class="checkout-btn">Proceed to checkout</button><div class="secure"><span>Secure Transaction</span></div></aside>
+  <main class="content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="home.html">Home</a>
+      <span class="chev">›</span>
+      <a href="product-list.html">List</a>
+      <span class="chev">›</span>
+      <span>Cart</span>
+    </nav>
+
+    <div class="cart-layout">
+      <section>
+        <h1 class="cart-title">Cart<span>Your collection</span></h1>
+        <div class="cart-list">
+          <!-- Items will be loaded from localStorage -->
+        </div>
+      </section>
+      <aside class="summary">
+        <h2>Order Summary</h2>
+        <div class="sum-row"><span class="label">Subtotal</span><span id="summarySubtotal">$1,600</span></div>
+        <div class="sum-row"><span class="label">Tax</span><span id="summaryTax">$124</span></div>
+        <div class="sum-row"><span class="label">Shipping</span><span>$0</span></div>
+        <div class="sum-total"><span class="label">Total Amount</span><span class="amount" id="summaryTotal">$1,724.00</span></div>
+        <button class="checkout-btn" type="button">Proceed to checkout</button>
+        <div class="secure"><span>Secure Transaction</span></div>
+      </aside>
+    </div>
   </main>
   
   <footer class="footer">
