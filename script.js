@@ -9,9 +9,6 @@
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
-  const aud = value => 'AUD$' + Number(value).toLocaleString('en-AU', { maximumFractionDigits: 0 });
-
-  
   const path = () => {
     const fileName = location.pathname.split('/').pop() || 'home.html';
     return fileName.split('?')[0];
@@ -228,17 +225,6 @@
     location.href = `product-list.html?q=${encodeURIComponent(term || '')}`;
   }
 
-  function chooseLayout(type){
-    const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('q');
-    const qParam = query ? `?q=${encodeURIComponent(query)}` : '';
-    if(type === 'vertical'){
-      location.href = 'product-list2.html' + qParam;
-      return;
-    }    
-    location.href = 'product-list.html' + qParam;
-  }
-
   function matchesSearch(product, query) {
     const q = query.toLowerCase().trim();
     if (!q) return true;
@@ -401,7 +387,7 @@
     renderProductList();
   }
 
-  async function renderProductList() {
+  function renderProductList() {
     const grid = $('.art-grid');
     if (!grid) return;
     const urlParams = new URLSearchParams(window.location.search);
@@ -424,13 +410,9 @@
       products.sort((a, b) => b.price - a.price);
     }
 
-    const titleEl = $('.big-title');
-    const countEl = $('.countbox .num');
-    if (query && titleEl) {
-      titleEl.textContent = rawQuery;
+    if (query) {
       document.title = `Search Results - ${rawQuery}`;
     }
-    if (countEl) countEl.textContent = products.length;
     updateSearchLayoutLinks();
 
     if (products.length === 0) {
@@ -463,7 +445,7 @@
     }).join('');
   }
 
-  async function renderProductPages() {
+  function renderProductPages() {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
     if (!productId) return;
@@ -658,11 +640,9 @@ function showToast(text){
   function renderWishlist() {
     const grid = $('#wishlistGrid');
     const emptyMsg = $('#emptyMsg');
-    const countNode = $('#wishCount');
     if (!grid) return;
     const wishlist = getWishlist();
     const products = productsData.filter(p => wishlist.includes(p.id));
-    if (countNode) countNode.textContent = products.length;
     if (products.length === 0) {
       grid.innerHTML = '';
       if(emptyMsg) emptyMsg.style.display = 'block';
@@ -831,11 +811,15 @@ function showToast(text){
       return;
     }
     refNode.textContent = lastOrder.ref;
+    const linePrice = value => '$' + Number(value).toLocaleString('en-AU', {
+      minimumFractionDigits: value % 1 ? 2 : 0,
+      maximumFractionDigits: 2
+    });
     receiptNode.innerHTML = lastOrder.items.map(item =>
-      `<div class="receipt-row"><span>${item.title} x${item.qty}</span><span>AUD${money(item.price * item.qty).replace('.00','')}</span></div>`
+      `<div class="receipt-row"><span>${item.title}</span><span>${linePrice(item.price * item.qty)}</span></div>`
     ).join('') +
-    `<div class="receipt-row muted"><span>Tax (7.75%)</span><span>AUD${money(lastOrder.tax).replace('.00','')}</span></div>
-     <div class="receipt-row receipt-total"><span>Total Paid</span><span>AUD${moneyFixed(lastOrder.total)}</span></div>`;
+    `<div class="receipt-row muted"><span>TAX</span><span>${linePrice(lastOrder.tax)}</span></div>
+     <div class="receipt-row receipt-total"><span>Total Paid</span><span>${linePrice(lastOrder.total)}</span></div>`;
   }
   function initProductQty(){
     const product = $('.product-info');
@@ -981,7 +965,7 @@ function showToast(text){
     bindEvents();
     initProductQty();
     const cur = path();
-    if (cur.includes('product-list') || cur.includes('search-results')) {
+    if (cur.includes('product-list')) {
       renderProductList();
     } else if (cur === 'product-pages.html') {
       renderProductPages();
