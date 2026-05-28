@@ -4,148 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Transaction Verified</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-
-<style>
-    .confirm-page {
-      position: relative;
-      min-height: calc(100vh - 63px - 74px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 24px;
-      background: #ffffff;
-      overflow: hidden;
-    }
-
-    .shape-1 {
-      position: absolute;
-      left: 10%;
-      top: 0;
-      width: 50%;
-      height: 100%;
-      background: #e0e0e0;
-      z-index: 1;
-    }
-
-    .confirmation-box {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      max-width: 1100px;
-      display: grid;
-      grid-template-columns: 62% 38%;
-      align-items: center;
-    }
-
-    .confirmation-left {
-      padding: 0 60px;
-    }
-
-    .verified {
-      font-family: Arial, sans-serif;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: #427c97;
-      margin-bottom: 16px;
-    }
-
-    .success {
-      font-family: Arial, sans-serif;
-      font-size: 76px;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      margin: 0 0 36px;
-      line-height: 1;
-      font-weight: 700;
-    }
-
-    .order-ref {
-      font-family: Arial, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #666;
-      margin-bottom: 8px;
-    }
-
-    .ref-code {
-      font-family: Arial, sans-serif;
-      font-size: 17px;
-      letter-spacing: 0.08em;
-      margin-bottom: 52px;
-    }
-
-    .receipt {
-      width: 100%;
-      margin: 0;
-    }
-
-    .receipt-row {
-      display: flex;
-      justify-content: space-between;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.04em;
-      margin: 16px 0;
-      text-transform: uppercase;
-    }
-
-    .receipt-row.muted {
-      color: #777;
-      font-size: 16px;
-    }
-
-    .receipt-total {
-      border-top: 2px solid #111;
-      margin-top: 28px;
-      padding-top: 28px;
-      font-size: 24px;
-      font-weight: 800;
-    }
-
-    .confirmation-right {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-    }
-
-    .back-home {
-      background: #111;
-      color: #fff;
-      padding: 20px 64px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      text-align: center;
-      transition: opacity 0.2s;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      right: -10%;
-      top: 90%;
-      width: 36%;
-    }
-
-    .back-home:hover {
-      opacity: 0.9;
-    }
-
-    @media (max-width: 1100px) {
-      .shape-1 { width: 100%; }
-      .shape-2 { display: none; }
-      .confirmation-box { grid-template-columns: 1fr; }
-      .confirmation-left { padding: 0 20px; text-align: center; }
-      .success { font-size: 52px; }
-      .confirmation-right { margin-top: 40px; }
-    }
-  </style>
-</head>
-
 
 <body class="confirmation-page">
   <div class="page-shell">
@@ -167,22 +30,28 @@
     </header>
 
     <main class="confirm-page">
-      <div class="shape-1"></div>
-      <div class="shape-2"></div>
+      <div class="confirmation-column">
+        <div class="confirmation-panel">
+          <div class="confirm-content">
+            <div class="verified">Transaction Verified</div>
+            <h1 class="success">Success</h1>
 
-      <div class="confirmation-box">
-        <div class="confirmation-left">
-          <div class="verified">Transaction Verified</div>
-          <h1 class="success">Success</h1>
+            <div class="order-ref-block">
+              <div class="order-ref">Order Reference</div>
+              <div class="ref-code" id="orderRef">---</div>
+            </div>
 
-          <div class="order-ref">Order Reference</div>
-          <div class="ref-code" id="orderRef">---</div>
+            <div class="receipt" id="orderReceipt"></div>
 
-          <div class="receipt" id="orderReceipt"></div>
-        </div>
+            <div class="confirm-actions">
+              <a class="back-home" href="home.html">Back to home page</a>
+            </div>
 
-        <div class="confirmation-right">
-          <a class="back-home" href="home.html">Back to home page</a>
+            <aside class="confirmation-contact" aria-label="Contact information">
+              <p>Phone: 1800 ART LOVER (1800 278 568)</p>
+              <p>Email: help@artloversaustralia.com.au</p>
+            </aside>
+          </div>
         </div>
       </div>
     </main>
@@ -195,7 +64,7 @@
       <div class="copyright">© 2026 Art Lovers Australia. All rights reserved.</div>
     </footer>
   </div>
-  
+
   <script src="script.js"></script>
 </body>
 </html>
