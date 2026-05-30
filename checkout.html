@@ -4,111 +4,123 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Checkout Payment</title>
+
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body class="checkout-page-body">
-  <header class="site-header">
-    <a class="brand" href="home.html">Art Lovers Australia</a>
-    <nav class="header-icons" aria-label="Main navigation">
-      <button class="icon-btn" data-open-search aria-label="Search">
-        <span class="icon search">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </span>
-      </button>
-      <a class="icon-btn fav-top" href="wishlist.html" aria-label="Wishlist">
-      <span class="icon heart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
-      </a>
-      <a class="icon-btn" href="cart.html" aria-label="Cart">
-        <span class="icon cart">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-        </span>
-      </a>
-    </nav>
-  </header>
+  <div class="page-shell">  
+    <header class="site-header">
+      <a class="brand" href="home.html">Art Lovers Australia</a>
+      <nav class="header-icons" aria-label="Main navigation">
+        <button class="icon-btn" data-open-search aria-label="Search">
+          <span class="icon search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </span>
+        </button>
+        <a class="icon-btn fav-top" href="wishlist.html" aria-label="Wishlist">
+        <span class="icon heart"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></span>
+        </a>
+        <a class="icon-btn" href="cart.html" aria-label="Cart">
+          <span class="icon cart">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          </span>
+        </a>
+      </nav>
+    </header>
 
-  <main class="content checkout-page-main">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="home.html">Home</a>
-      <span class="chev">›</span>
-      <a href="product-list.html">List</a>
-      <span class="chev">›</span>
-      <a href="cart.html">Cart</a>
-      <span class="chev">›</span>
-      <span>Checkout</span>
-    </nav>
+    <main class="content checkout-page-main">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="home.html">Home</a>
+        <span class="chev">›</span>
+        <a href="product-list.html">List</a>
+        <span class="chev">›</span>
+        <a href="cart.html">Cart</a>
+        <span class="chev">›</span>
+        <span>Checkout</span>
+      </nav>
 
-    <div class="checkout-layout">
-    <section class="checkout-left" aria-labelledby="order-items-heading">
-      <h2 id="order-items-heading">Your Order Items</h2>
-      <div id="checkoutItems"></div>
-    </section>
-
-    <aside class="checkout-right">
-      <section class="checkout-card" aria-labelledby="checkout-heading">
-        <h1 id="checkout-heading">Checkout Payment</h1>
-
-        <form id="checkoutForm" novalidate>
-          <h2>Digital Delivery Information</h2>
-
-          <div class="field">
-            <label for="first">First Name</label>
-            <input id="first" name="first" type="text" autocomplete="given-name" required/>
-            <p class="field-error" data-error-for="first" role="alert"></p>
-          </div>
-
-          <div class="field">
-            <label for="last">Last Name</label>
-            <input id="last" name="last" type="text" autocomplete="family-name" required />
-            <p class="field-error" data-error-for="last" role="alert"></p>
-          </div>
-
-          <div class="field">
-            <label for="email">Email Address</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
-            <p class="field-error" data-error-for="email" role="alert"></p>
-          </div>
-          <p class="hint">Your high-resolution digital file will be sent here.</p>
-
-          <div class="field">
-            <label for="wallet">Wallet Address</label>
-            <input id="wallet" name="wallet" type="text" inputmode="numeric" autocomplete="off" required />
-            <p class="field-error" data-error-for="wallet" role="alert"></p>
-          </div>
-
-          <div class="order-summary" aria-label="Order totals">
-            <div class="sum-row">
-              <span>Subtotal</span>
-              <span id="sumSubtotal">$0</span>
-            </div>
-            <div class="sum-row">
-              <span>Tax (7.75%)</span>
-              <span id="sumTax">$0</span>
-            </div>
-            <div class="sum-row">
-              <span>Shipping</span>
-              <span>Free</span>
-            </div>
-            <div class="sum-total">
-              <span>Total</span>
-              <span id="sumTotal">$0</span>
-            </div>
-          </div>
-
-          <button class="continue-btn" type="submit">Continue to Payment</button>
-        </form>
+      <div class="checkout-layout">
+      <section class="checkout-left" aria-labelledby="order-items-heading">
+        <h2 id="order-items-heading">Your Order Items</h2>
+        <div id="checkoutItems"></div>
       </section>
-    </aside>
-  </div>
-  </main>
 
-  <footer class="footer">
-  <a class="brand" href="home.html">Art Lovers Australia</a>
-  <nav class="footer-nav" aria-label="Footer links">
-    <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Index</a><a href="#">Submission</a>
-  </nav>
-  <div class="copyright">© 2026 Art Lovers Australia. All rights reserved.</div>
-  </footer>
-    <script src="script.js"></script>
+      <aside class="checkout-right">
+        <section class="checkout-card" aria-labelledby="checkout-heading">
+          <h1 id="checkout-heading">Checkout Payment</h1>
+
+          <form id="checkoutForm" novalidate>
+            <h2>Digital Delivery Information</h2>
+
+            <div class="field">
+              <label for="first">First Name</label>
+              <input id="first" name="first" type="text" autocomplete="given-name" required/>
+              <p class="field-error" data-error-for="first" role="alert"></p>
+            </div>
+
+            <div class="field">
+              <label for="last">Last Name</label>
+              <input id="last" name="last" type="text" autocomplete="family-name" required />
+              <p class="field-error" data-error-for="last" role="alert"></p>
+            </div>
+
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+              <p class="field-error" data-error-for="email" role="alert"></p>
+            </div>
+            <p class="hint">Your high-resolution digital file will be sent here.</p>
+
+            <div class="field">
+              <label for="wallet">Wallet Address</label>
+              <input id="wallet" name="wallet" type="text" inputmode="numeric" autocomplete="off" required />
+              <p class="field-error" data-error-for="wallet" role="alert"></p>
+            </div>
+
+            <div class="order-summary" aria-label="Order totals">
+              <div class="sum-row">
+                <span>Subtotal</span>
+                <span id="sumSubtotal">$0</span>
+              </div>
+              <div class="sum-row">
+                <span>Tax (7.75%)</span>
+                <span id="sumTax">$0</span>
+              </div>
+              <div class="sum-row">
+                <span>Shipping</span>
+                <span>Free</span>
+              </div>
+              <div class="sum-total">
+                <span>Total</span>
+                <span id="sumTotal">$0</span>
+              </div>
+            </div>
+
+            <button class="continue-btn" type="submit">Continue to Payment</button>
+          </form>
+        </section>
+      </aside>
+    </div>
+    </main>
+
+    <footer class="footer">
+    <a class="brand" href="home.html">Art Lovers Australia</a>
+    <nav class="footer-nav" aria-label="Footer links">
+      <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Index</a><a href="#">Submission</a>
+    </nav>
+    <div class="copyright">© 2026 Art Lovers Australia. All rights reserved.</div>
+    </footer>
+    
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
