@@ -175,8 +175,8 @@ img {
 }
 
 .tech {
-	font-family: Arial, sans-serif;
-	letter-spacing: .08em;
+	font-family: 'Cinzel', serif;
+	letter-spacing: .15em;
 	text-transform: uppercase;
 	font-weight: 600;
 }
@@ -600,8 +600,8 @@ img {
 
 .end-block {
 	text-align: center;
-	font-family: Arial, sans-serif;
-	letter-spacing: .27em;
+	font-family:'Cinzel', serif;
+	letter-spacing: .2em;
 	text-transform: uppercase;
 	font-size: 16px;
 	margin: 0 auto 16px;
@@ -763,7 +763,6 @@ img {
 }
 
 .price {
-	font-family: Arial, sans-serif;
 	font-size: 25px;
 	font-weight: 800;
 	text-align: right;
@@ -907,9 +906,9 @@ img {
 }
 
 .product-price {
-    font-family: 'Gravitas One' !important;
-	font-size: 42px;
-	font-weight: 400;
+    font-family:'Gravitas One',serif;
+	font-size: 50px;
+	font-weight: 900;
 	color: #252525;
 	letter-spacing: 0.01em;
 }
@@ -1090,16 +1089,17 @@ img {
 }
 
 .cart-title {
-	font-family: Arial, sans-serif;
+    font-family: Cinzel, sans-serif;
 	font-size: clamp(32px, 5vw, 64px);
 	line-height: 1.05;
 	text-transform: uppercase;
 	letter-spacing: .01em;
-	font-weight: 500;
+	font-weight: 900;
 	margin: clamp(40px, 6vw, 74px) 0 clamp(36px, 5vw, 72px);
 }
 
 .cart-title span {
+	font-family: Cinzel, sans-serif;
 	display: block;
 	font-size: 24px;
 	margin-top: 20px
@@ -1154,7 +1154,7 @@ img {
 }
 
 .cart-copy h3 {
-	font-family: Arial, sans-serif;
+    font-family: Cinzel, sans-serif;
 	font-size: clamp(18px, 2.5vw, 27px);
 	letter-spacing: .03em;
 	text-transform: uppercase;
@@ -1163,7 +1163,7 @@ img {
 }
 
 .cart-copy p {
-	font-family: Arial, sans-serif;
+    font-family: Cinzel, sans-serif;
 	font-size: 11px;
 	letter-spacing: .12em;
 	text-transform: uppercase;
@@ -1229,7 +1229,7 @@ img {
 }
 
 .item-price {
-	font-family: Arial, sans-serif;
+	font-family:'Gravitas One',serif;
 	font-size: clamp(18px, 2.5vw, 26px);
 	font-weight: 800;
 	margin-top: 5px;
@@ -1247,11 +1247,11 @@ img {
 }
 
 .summary h2 {
-	font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
 	font-size: 31px;
 	letter-spacing: .02em;
 	text-transform: uppercase;
-	font-weight: 500;
+	font-weight: 800;
 	margin: 0 0 26px;
 	border-bottom: 2px solid #111;
 	padding-bottom: 24px
@@ -1284,8 +1284,8 @@ img {
 
 .sum-total .label {
 	font-family: Arial, sans-serif;
-	font-size: 15px;
-	letter-spacing: .28em;
+	font-size: 20px;
+	letter-spacing: .02em;
 	text-transform: uppercase;
 	font-weight: 800
 }
@@ -1404,7 +1404,7 @@ img {
 }
 
 .verified {
-	font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
 	letter-spacing: .22em;
 	text-transform: uppercase;
 	font-size: 11px;
@@ -1414,13 +1414,13 @@ img {
 }
 
 .success {
-	font-family: 'Bebas Neue', var(--font-title), sans-serif;
-	font-size: clamp(72px, 14vw, 108px);
+	font-family: Cinzel, sans-serif;
+	font-size: clamp(72px, 14vw, 95px);
 	letter-spacing: .04em;
 	text-transform: uppercase;
 	margin: 0 0 44px;
 	line-height: .92;
-	font-weight: 400;
+	font-weight: 900;
 	color: #111;
 	text-align: center;
 }
@@ -1769,7 +1769,7 @@ img {
 }
 
 .checkout-left h2 {
-    font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
     font-size: 20px;
     letter-spacing: .05em;
     text-transform: uppercase;
@@ -1832,7 +1832,7 @@ img {
 }
 
 .checkout-card h1 {
-    font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
     font-size: 26px;
     letter-spacing: .04em;
     text-transform: uppercase;
@@ -1840,7 +1840,7 @@ img {
 }
 
 .checkout-card h2 {
-    font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
     font-size: 15px;
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -2337,7 +2337,7 @@ img {
 }
 
 .checkout-left h2 {
-	font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
 	font-size: 20px;
 	letter-spacing: .05em;
 	text-transform: uppercase;
@@ -2363,7 +2363,7 @@ img {
 }
 
 .checkout-item-info h4 {
-	font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
 	font-size: 20px;
 	margin: 0 0 20px;
 	letter-spacing: .02em;
@@ -2378,7 +2378,7 @@ img {
 
 .checkout-item-price {
 	text-align: right;
-	font-family: Arial, sans-serif;
+	font-family:'Gravitas One',serif;
 	font-size: 16px;
 	font-weight: 700;
 	margin-top: 50px;
@@ -2400,7 +2400,7 @@ img {
 }
 
 .checkout-card h1 {
-	font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
 	font-size: 26px;
 	letter-spacing: .04em;
 	text-transform: uppercase;
@@ -2408,7 +2408,7 @@ img {
 }
 
 .checkout-card h2 {
-	font-family: Arial, sans-serif;
+	font-family: Cinzel, sans-serif;
 	font-size: 15px;
 	letter-spacing: .18em;
 	text-transform: uppercase;
@@ -2483,10 +2483,11 @@ img {
 }
 
 .checkout-card .sum-total {
+	font-family: Arial, sans-serif;
 	display: flex;
 	justify-content: space-between;
 	font-weight: 900;
-	font-size: 18px;
+	font-size: 25px;
 	border-top: 2px solid #111;
 	padding-top: 16px;
 	margin-top: 16px;
