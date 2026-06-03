@@ -21,10 +21,10 @@
       "artist": "Emma Coombes",
       "price": 600,
       "originalPrice": 850,
-      "category": "warm",
+      "category": "cold",
       "image": "assets/the-herald.jpg",
       "roomImage": "assets/herald-room.jpg",
-      "description": "The Herald captures the ethereal beauty of a shifting sky.",
+      "description": "The raven as herald stands at the entrance to his kingdom. A symbol of the mysteries that dwell within the forest.",
       "specs": {
         "Medium": "Giclee Print on Archival Cotton Rag",
         "Edition": "Limited edition of 25",
@@ -41,8 +41,8 @@
       "price": 1550,
       "category": "warm",
       "image": "assets/neon-57.png",
-      "roomImage": "assets/neon-57.png",
-      "description": "A vibrant exploration of urban energy.",
+      "roomImage": "assets/neon-57 2.png",
+      "description": "A charged and dynamic reinterpretation of the legendary.",
       "specs": {
         "Medium": "Acrylic on Canvas",
         "Edition": "Original Artwork",
@@ -57,14 +57,14 @@
       "title": "Zen XII Ltd Ed Print",
       "artist": "Elie Bittoun",
       "price": 1200,
-      "category": "cold",
+      "category": "warm",
       "image": "assets/zen-xii.jpg",
-      "roomImage": "assets/city-room.png",
-      "description": "Zen XII is a study in minimalism.",
+      "roomImage": "assets/zen-xii 2.jpg",
+      "description": "I portray both the beauty and complexity behind faces. Also available in various sizes on request.",
       "specs": {
-        "Medium": "Fine Art Print",
-        "Edition": "Limited edition of 50",
-        "Dimensions": "80 x 80 cm",
+        "Medium": "Digital artwork on wraparound canvas",
+        "Edition": "Limited edition of 25",
+        "Dimensions": "60 x 90 cm",
         "Framing": "Unframed",
         "Paper Weight": "300gsm"
       },
@@ -77,12 +77,12 @@
       "price": 1100,
       "category": "warm",
       "image": "assets/wishing-tree.jpg",
-      "roomImage": "assets/herald-room.jpg",
-      "description": "A whimsical depiction of a mythical tree.",
+      "roomImage": "assets/wishing-tree 2.jpg",
+      "description": "In Asian cultures, cherry blossom trees symbolise bravery and wisdom. The snow covered white tree is a symbol of simplicity, purity and innocence.",
       "specs": {
-        "Medium": "Oil on Canvas",
-        "Edition": "Original Artwork",
-        "Dimensions": "120 x 90 cm",
+        "Medium": "Giclee print on canvas",
+        "Edition": "Limited Edition of 50",
+        "Dimensions": "10 x 10 cm",
         "Framing": "Custom Frame",
         "Paper Weight": "N/A"
       },
@@ -96,16 +96,16 @@
       "originalPrice": 1200,
       "category": "cold",
       "image": "assets/city-beach.jpg",
-      "roomImage": "assets/city-room.png",
-      "description": "Aerial perspective of the coastline.",
+      "roomImage": "assets/city beach2.jpg",
+      "description": "A young girl plays in the shallows of an ocean sand bar.",
       "specs": {
-        "Medium": "Photography",
-        "Edition": "Limited edition of 10",
-        "Dimensions": "100 x 100 cm",
+        "Medium": "Cotton RAG fine art matte paper",
+        "Edition": "Limited edition of 22",
+        "Dimensions": "60 x 70 cm",
         "Framing": "Shadow Box",
         "Paper Weight": "310gsm RAG"
       },
-      "aboutArtist": "Chris Dark is a coastal photographer."
+      "aboutArtist": "Chris Dark is a photographer."
     },
     {
       "id": "cirrus",
@@ -115,14 +115,14 @@
       "originalPrice": 900,
       "category": "cold",
       "image": "assets/cirrus.jpg",
-      "roomImage": "assets/city-room.png",
-      "description": "Exploring meteorological phenomena.",
+      "roomImage": "assets/cirrus_detail.jpg",
+      "description": "This image uses the Cirrus band, which is a very specific infrared wavelength range designed just to capture cirrus clouds, which are very high and very cold, and their wispy forms are treated by scientists as a kind of “noise” in satellite imaging. ",
       "specs": {
-        "Medium": "Digital Fine Art Print",
-        "Edition": "Limited edition of 30",
-        "Dimensions": "60 x 60 cm",
+        "Medium": "Quality Hahnemuhle Photo",
+        "Edition": "Limited edition of 50",
+        "Dimensions": "80 x 80 cm",
         "Framing": "Unframed",
-        "Paper Weight": "280gsm"
+        "Paper Weight": "308gsm"
       },
       "aboutArtist": "Grayson Cooke is an interdisciplinary artist."
     },
@@ -131,16 +131,16 @@
       "title": "Zebra on Black",
       "artist": "Peter Masters",
       "price": 1100,
-      "category": "warm",
+      "category": "cold",
       "image": "assets/zebra-on-black.jpg",
-      "roomImage": "assets/herald-room.jpg",
-      "description": "Monochromatic portrait of a zebra.",
+      "roomImage": "assets/Zebrz-on-Black1.jpg",
+      "description": "Grazing peacefully but alert and ready to run, always on the watch for danger.",
       "specs": {
-        "Medium": "Charcoal and Pastel",
-        "Edition": "Original Artwork",
+        "Medium": "Giclee Print",
+        "Edition": "Limited Edition of 25",
         "Dimensions": "75 x 100 cm",
-        "Framing": "Framed under glass",
-        "Paper Weight": "350gsm"
+        "Framing": "Unframed",
+        "Paper Weight": "330gsm"
       },
       "aboutArtist": "Peter Masters is a master of texture and form."
     },
@@ -151,16 +151,16 @@
       "price": 1350,
       "category": "cold",
       "image": "assets/another-place.jpg",
-      "roomImage": "assets/city-room.png",
-      "description": "Coastal isolation and distant horizon.",
+      "roomImage": "assets/Another Place 2.jpg",
+      "description": "Digital photographic image taken at City Beach in Perth Western Australia.",
       "specs": {
-        "Medium": "Mixed Media",
-        "Edition": "Original Artwork",
-        "Dimensions": "90 x 90 cm",
+        "Medium": "Cotton RAG fine art matte paper",
+        "Edition": "Limited edition of 13",
+        "Dimensions": "110 x 45 cm",
         "Framing": "Oak Floating Frame",
         "Paper Weight": "N/A"
       },
-      "aboutArtist": "Chris Dark's work is held in private collections."
+      "aboutArtist": "Chris Dark is a photographer."
     },
     {
       "id": "endurance",
@@ -169,52 +169,52 @@
       "price": 2000,
       "category": "cold",
       "image": "assets/endurance.jpg",
-      "roomImage": "assets/city-room.png",
-      "description": "Sea energy against steadfast cliffs.",
+      "roomImage": "assets/endurance2.jpg",
+      "description": "This old sign post structure stands with nothing left to point to. A memory of purpose and place that has been erased almost entirely.",
       "specs": {
-        "Medium": "Oil on Canvas",
-        "Edition": "Original Artwork",
-        "Dimensions": "150 x 100 cm",
+        "Medium": "Cotton RAG fine art matte paper",
+        "Edition": "Limited edition of 13",
+        "Dimensions": "100 x 110 cm",
         "Framing": "Stretched",
         "Paper Weight": "N/A"
       },
-      "aboutArtist": "Chris Dark spends weeks on location."
+      "aboutArtist": "Chris Dark is a photographer."
     },
     {
       "id": "portrait-study",
-      "title": "Portrait Study in Black",
-      "artist": "Emma Coombes",
+      "title": "Cipher Ltd Ed Print",
+      "artist": "Subroser",
       "price": 850,
-      "category": "warm",
+      "category": "cold",
       "image": "assets/intro-portrait.jpg",
-      "roomImage": "assets/herald-room.jpg",
+      "roomImage": "assets/portraits.jpg",
       "description": "Dramatic light and shadow on human form.",
       "specs": {
-        "Medium": "Acrylic on Paper",
+        "Medium": "Digital painting on Hahnemuhle photo",
         "Edition": "Original Artwork",
         "Dimensions": "50 x 70 cm",
         "Framing": "Black Modern Frame",
-        "Paper Weight": "400gsm"
+        "Paper Weight": "308gsm"
       },
-      "aboutArtist": "Emma's portraiture is sought after."
+      "aboutArtist": "Subroser's portraiture is sought after."
     },
     {
       "id": "still-life-vases",
-      "title": "Still Life Vases",
-      "artist": "Elie Bittoun",
+      "title": "Three Pots with Orchids Ltd Ed Print",
+      "artist": "Tabitha Stowe",
       "price": 950,
       "category": "warm",
       "image": "assets/intro-vases.jpg",
-      "roomImage": "assets/herald-room.jpg",
-      "description": "Modern take on classic still life.",
+      "roomImage": "assets/vases2.jpg",
+      "description": "A stunning addition to any wall in your home. Contempo pot canvas print with orchids",
       "specs": {
-        "Medium": "Giclee Print",
+        "Medium": "Giclee print on canvas",
         "Edition": "Limited edition of 100",
-        "Dimensions": "40 x 50 cm",
-        "Framing": "Minimalist White Frame",
-        "Paper Weight": "310gsm"
+        "Dimensions": "80 x 80 cm",
+        "Framing": "Tasmanian oak float frame",
+        "Paper Weight": "308gsm"
       },
-      "aboutArtist": "Elie's still life works are celebrated."
+      "aboutArtist": "Elie's works are celebrated."
     },
   ];
 
@@ -267,7 +267,7 @@
     });
   }
 
-  const DEFAULT_SEARCH_SUGGESTIONS = ['Cold', 'Warm', 'Emma Coombes'];
+  const DEFAULT_SEARCH_SUGGESTIONS = ['Cold', 'Warm', 'Chris Dark'];
   const DEFAULT_SEARCH_TERM = 'Cold colour';
 
   function getSearchInputDefault() {
@@ -487,7 +487,7 @@
           <div class="product-desc"><p>${product.description}</p></div>
           <div class="qty-price">
             <div class="price-row">
-              <span class="price-label">Investment</span>
+              <span class="price-label">Price</span>
               <span class="product-price">${detailPriceHtml}</span>
             </div>
             <div class="price-row">
