@@ -435,9 +435,10 @@
               <h3 class="art-title">${p.title}</h3>
               <p class="art-artist">${p.artist}</p>
             </a>
-            <button class="fav ${isFav ? 'is-on' : ''}" data-wish-id="${p.id}" aria-label="Add to wishlist">
-              ${isFav ? '♥' : '♡'}
-            </button>
+        <button class="fav ${isFav ? 'is-on' : ''}" data-wish-id="${p.id}" aria-label="Add to wishlist">
+  <img src="assets/heart-empty.png" class="heart-empty" alt="">
+  <img src="assets/heart-full.png" class="heart-full" alt="">
+</button>
           </div>
           <div class="price">${priceHtml}</div>
         </article>
@@ -499,9 +500,10 @@
             </div>
           </div>
           <div class="product-actions">
-            <button class="wish-btn fav ${isFav ? 'is-on' : ''}" data-wish-id="${product.id}" aria-label="Add to wishlist">
-              ${isFav ? '♥' : '♡'}
-            </button>
+           <button class="wish-btn fav ${isFav ? 'is-on' : ''}" data-wish-id="${product.id}" aria-label="Add to wishlist" style="width:118px;">
+  <img src="assets/heart-empty.png" class="heart-empty" alt="">
+  <img src="assets/heart-full.png" class="heart-full" alt="">
+</button>
             <button class="add-cart" data-add-cart>Add to cart</button>
           </div>
         </div>
@@ -637,39 +639,43 @@ function showToast(text){
     if (path() === 'wishlist.html') renderWishlist();
   }
 
-  function renderWishlist() {
-    const grid = $('#wishlistGrid');
-    const emptyMsg = $('#emptyMsg');
-    if (!grid) return;
-    const wishlist = getWishlist();
-    const products = productsData.filter(p => wishlist.includes(p.id));
-    if (products.length === 0) {
-      grid.innerHTML = '';
-      if(emptyMsg) emptyMsg.style.display = 'block';
-      return;
-    }
-    if(emptyMsg) emptyMsg.style.display = 'none';
-    grid.innerHTML = products.map(p => {
-      const priceHtml = p.originalPrice
-        ? `<span class="old-price">${money(p.originalPrice).replace('.00','')}</span> AUD${money(p.price).replace('.00','')}`
-        : `AUD${money(p.price).replace('.00','')}`;
-      return `
-        <article class="art-card" data-id="${p.id}">
-          <a class="art-img-wrap" href="product-pages.html?id=${p.id}">
-            <img src="${p.image}" alt="${p.title}" />
-          </a>
-          <div class="art-meta">
-            <a href="product-pages.html?id=${p.id}">
-              <h3 class="art-title">${p.title}</h3>
-              <p class="art-artist">${p.artist}</p>
-            </a>
-            <button class="fav is-on" data-wish-id="${p.id}" aria-label="Remove from wishlist">♥</button>
-          </div>
-          <div class="price">${priceHtml}</div>
-        </article>
-      `;
-    }).join('');
+ function renderWishlist() {
+  const grid = $('#wishlistGrid');
+  const emptyMsg = $('#emptyMsg');
+  if (!grid) return;
+  const wishlist = getWishlist();
+  const products = productsData.filter(p => wishlist.includes(p.id));
+  if (products.length === 0) {
+    grid.innerHTML = '';
+    if(emptyMsg) emptyMsg.style.display = 'block';
+    return;
   }
+  if(emptyMsg) emptyMsg.style.display = 'none';
+  grid.innerHTML = products.map(p => {
+    const priceHtml = p.originalPrice
+      ? `<span class="old-price">${money(p.originalPrice).replace('.00','')}</span> AUD${money(p.price).replace('.00','')}`
+      : `AUD${money(p.price).replace('.00','')}`;
+    return `
+      <article class="art-card" data-id="${p.id}">
+        <a class="art-img-wrap" href="product-pages.html?id=${p.id}">
+          <img src="${p.image}" alt="${p.title}" />
+        </a>
+        <div class="art-meta">
+          <a href="product-pages.html?id=${p.id}">
+            <h3 class="art-title">${p.title}</h3>
+            <p class="art-artist">${p.artist}</p>
+          </a>
+     
+        <button class="fav is-on" data-wish-id="${p.id}" aria-label="Remove from wishlist">
+  <img src="assets/heart-empty.png" class="heart-empty" alt="">
+  <img src="assets/heart-full.png" class="heart-full" alt="">
+</button>
+        </div>
+        <div class="price">${priceHtml}</div>
+      </article>
+    `;
+  }).join('');
+}
 
   function addToCart(productId, qty) {
     const cart = getCart();
@@ -889,7 +895,7 @@ function showToast(text){
         if (wishId) {
           toggleWishlist(wishId);
           fav.classList.toggle('is-on');
-          fav.textContent = fav.classList.contains('is-on') ? '♥' : '♡';
+          
         }
         return;
       }
