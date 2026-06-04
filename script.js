@@ -10,7 +10,7 @@
     maximumFractionDigits: 2
   });
   const path = () => {
-    const fileName = location.pathname.split('/').pop() || 'home.html';
+    const fileName = location.pathname.split('/').pop() || 'index.html';
     return fileName.split('?')[0];
   };
 
@@ -469,7 +469,7 @@
     content.innerHTML = `
       <div class="content">
         <nav class="breadcrumb">
-          <a href="home.html">Home</a>
+          <a href="index.html">Home</a>
           <span class="chev">›</span>
           <a href="product-list.html">List</a>
           <span class="chev">›</span>
