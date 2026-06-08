@@ -228,7 +228,10 @@ img {
 	margin-left: 0;
 	max-width: 100%;
 }
-
+.filter-option.active {
+  background: #000 !important;
+  color: #fff !important;
+}
 .filter-options.show {
 	display: flex;
 }
@@ -2582,4 +2585,149 @@ img {
 		font-size: 22px;
 		margin-bottom: 24px;
 	}
+}
+
+.camera-btn {
+  position: absolute !important;
+  bottom: 630px !important;
+  right: 10px !important;
+  z-index: 999 !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: none !important;
+}
+
+.camera-btn img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+
+@media (max-width: 768px) {
+  .camera-btn {
+    display: block !important;
+  }
+}
+
+.camera-wrap {
+  width:100%;
+  height:100%;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+
+.cam-header {
+  width:100%;
+  height:70px;
+  background:#D4D4D4;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 22px;
+  position:relative;
+  z-index:10;
+}
+
+.back-btn {
+  font-size:42px;
+  color:#000;
+  text-decoration:none;
+  line-height:1;
+}
+
+.camera-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.preview-area {
+  flex:1;
+  width:100%;
+  position:relative;
+  overflow:hidden;
+}
+
+.room-img {
+  height:520px;
+  object-fit:cover;
+  display:block;
+}
+
+.art-info-bar-link {
+  display: block;
+  text-decoration: none;
+}
+
+.art-info-bar {
+  width:100%;
+  height:180px;
+  background:#e6e6e6;
+  display:grid;
+  grid-template-columns:24% 76%;
+  padding:18px 16px;
+  gap:14px;
+  cursor: pointer;
+}
+
+.thumb-art {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.art-text {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.art-title {
+  font-size:36px;
+  font-weight:600;
+  letter-spacing:0.04em;
+}
+
+.art-author {
+  font-size:20px;
+  margin-top:8px;
+  text-transform:uppercase;
+  color:#222;
+}
+
+.art-price {
+  margin-left:auto;
+  font-size:42px;
+}
+
+.cam-footer {
+  width:100%;
+  height:170px;
+  background:#D4D4D4;
+  display:grid;
+  place-items:center;
+}
+
+.shoot-btn {
+  width:110px;
+  height:80px;
+  border:7px solid #000;
+  border-radius:22px;
+  position:relative;
+  background:transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.shoot-btn::after {
+  content:"";
+  position:absolute;
+  width:38px;height:38px;
+  border:6px solid #000;
+  border-radius:50%;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
 }
