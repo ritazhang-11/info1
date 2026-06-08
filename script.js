@@ -374,20 +374,33 @@
     if (totalNode) totalNode.textContent = '$' + pending.total.toLocaleString();
   }
 
-  function filterCards(category) {
-    currentFilter = category;
-    if (category === 'cold' || category === 'warm') {
-      clearSearchQueryFromUrl();
-    }
-    renderProductList();
+function filterCards(category) {
+  currentFilter = category;
+  currentSort = null;
+  if (category === 'cold' || category === 'warm') {
+    clearSearchQueryFromUrl();
   }
-
-  function sortCards(dir) {
-    currentSort = dir;
-    renderProductList();
+  setActiveFilterButton();
+  renderProductList();
+}
+function sortCards(dir) {
+  currentSort = dir;
+  currentFilter = 'all';
+  setActiveFilterButton();
+  renderProductList();
+}
+function setActiveFilterButton() {
+  $$('.filter-option').forEach(btn => btn.classList.remove('active'));
+  
+  if (currentSort) {
+    $(`.filter-option[data-sort="${currentSort}"]`)?.classList.add('active');
+  } else {
+    $(`.filter-option[data-filter="${currentFilter}"]`)?.classList.add('active');
   }
+}
 
   function renderProductList() {
+	  setActiveFilterButton();
     const grid = $('.art-grid');
     if (!grid) return;
     const urlParams = new URLSearchParams(window.location.search);
