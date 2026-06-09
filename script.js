@@ -255,6 +255,7 @@
       }
     });
   }
+  
   function initSearchInput() {
     const input = $('#searchInput');
     if (!input) return;

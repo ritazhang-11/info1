@@ -232,6 +232,7 @@ img {
   background: #000 !important;
   color: #fff !important;
 }
+
 .filter-options.show {
 	display: flex;
 }
